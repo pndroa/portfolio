@@ -19,7 +19,7 @@ export default function Home() {
     <>
       <Header>
         <ButtonComponent
-          onClick={() => {
+          onClickEvent={() => {
             homeRef.current?.scrollIntoView({
               behavior: "smooth",
             })
@@ -28,8 +28,7 @@ export default function Home() {
           Home
         </ButtonComponent>
         <ButtonComponent
-          onClick={() => {
-            console.log(aboutRef.current)
+          onClickEvent={() => {
             aboutRef.current?.scrollIntoView({
               behavior: "smooth",
             })
@@ -38,7 +37,7 @@ export default function Home() {
           About Me
         </ButtonComponent>
         <ButtonComponent
-          onClick={() => {
+          onClickEvent={() => {
             cvRef.current?.scrollIntoView({
               behavior: "smooth",
             })
@@ -47,7 +46,7 @@ export default function Home() {
           CV
         </ButtonComponent>
         <ButtonComponent
-          onClick={() => {
+          onClickEvent={() => {
             projectsRef.current?.scrollIntoView({
               behavior: "smooth",
             })
@@ -56,7 +55,7 @@ export default function Home() {
           Projects
         </ButtonComponent>
         <ButtonComponent
-          onClick={() => {
+          onClickEvent={() => {
             contactsRef.current?.scrollIntoView({
               behavior: "smooth",
             })
