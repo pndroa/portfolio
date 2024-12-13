@@ -1,11 +1,16 @@
 import React from "react"
+import { Box } from "@mui/material"
 
 interface Props {
   children?: React.ReactNode
 }
 
 const Header: React.FC<Props> = ({ children }) => {
-  return <div className="flex gap-5">{children}</div>
+  return (
+    <Box className="flex gap-[2rem] justify-end pr-[2rem] fixed top-0 left-0 w-[100%] bg-black">
+      {children}
+    </Box>
+  )
 }
 
 export default Header
