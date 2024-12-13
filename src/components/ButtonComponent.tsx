@@ -2,12 +2,12 @@ import React from "react"
 import { Button } from "@mui/material"
 
 interface Props {
-  onClickEvent?: () => void
+  onClick?: () => void
   children?: React.ReactNode
 }
 
-const ButtonComponent: React.FC<Props> = ({ onClickEvent, children }) => {
-  return <Button onClick={onClickEvent}>{children}</Button>
+const ButtonComponent: React.FC<Props> = ({ onClick, children }) => {
+  return <Button onClick={onClick}>{children}</Button>
 }
 
 export default ButtonComponent
