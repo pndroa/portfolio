@@ -7,7 +7,7 @@ interface Props {
 
 const Header: React.FC<Props> = ({ children }) => {
   return (
-    <Box className="flex gap-[2rem] justify-end pr-[2rem] fixed top-0 left-0 w-[100%] bg-black">
+    <Box className="flex gap-[2rem] justify-end pr-[2rem] fixed top-0 left-0 w-[100%] bg-black sm:gap-[1rem] sm:pr-0">
       {children}
     </Box>
   )
