@@ -5,7 +5,6 @@ import ButtonComponent from "@/components/ButtonComponent"
 import Section from "@/components/Section"
 import { Box } from "@mui/material"
 import { Card, CardFooter, Image, Button } from "@nextui-org/react"
-import { Alert } from "@nextui-org/react"
 
 export default function Home() {
   /* Refs */
