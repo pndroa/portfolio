@@ -8,14 +8,7 @@ interface Props {
 
 const HeaderElements: React.FC<Props> = ({ link, name }) => {
   return (
-    <Link
-      href={link}
-      style={{
-        textDecoration: "none",
-        color: "black",
-        fontSize: "50px",
-      }}
-    >
+    <Link href={link} className="text-black decoration-none text-4xl">
       {name}
     </Link>
   )

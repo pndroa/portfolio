@@ -5,16 +5,7 @@ interface Props {
 }
 
 const Header: React.FC<Props> = ({ children }) => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        gap: "2rem",
-      }}
-    >
-      {children}
-    </div>
-  )
+  return <div className="flex gap-5">{children}</div>
 }
 
 export default Header
