@@ -5,7 +5,16 @@ interface Props {
 }
 
 const Footer: React.FC<Props> = ({ children }) => {
-  return <div>{children}</div>
+  return (
+    <div
+      style={{
+        display: "flex",
+        gap: "2rem",
+      }}
+    >
+      {children}
+    </div>
+  )
 }
 
 export default Footer

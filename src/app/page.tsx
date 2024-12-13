@@ -7,11 +7,15 @@ export default function Home() {
   return (
     <>
       <Header>
-        <HeaderElements link="/" name="About"></HeaderElements>
+        <HeaderElements link="/" name="About" />
+        <HeaderElements link="/" name="Projects" />
+        <HeaderElements link="/" name="Work" />
       </Header>
       <h1>Hello World</h1>
       <Footer>
-        <FooterElements link="/" name="Dashbord" />
+        <FooterElements link="/" name="LinkedIn" />
+        <FooterElements link="/" name="GitHub" />
+        <FooterElements link="/" name="E-Mail" />
       </Footer>
     </>
   )
