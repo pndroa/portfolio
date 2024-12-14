@@ -1,21 +1,21 @@
-import React from "react"
-import { Box } from "@mui/material"
+import { Box } from '@mui/material';
+import React from 'react';
 
 interface Props {
-  ref?: React.RefObject<HTMLTableSectionElement | null>
-  children?: React.ReactNode
+  ref?: React.Ref<HTMLTableSectionElement>;
+  children?: React.ReactNode;
 }
 
 const Section: React.FC<Props> = ({ ref, children }) => {
   return (
     <Box
-      component="section"
       ref={ref}
-      className="grid place-items-center content-center min-h-[100vh]"
+      component='section'
+      className='grid place-items-center content-center min-h-[100vh]'
     >
       {children}
     </Box>
-  )
-}
+  );
+};
 
-export default Section
+export default Section;

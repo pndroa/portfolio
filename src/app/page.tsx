@@ -1,79 +1,68 @@
-"use client"
-import React from "react"
-import Header from "@/components/Header"
-import ButtonComponent from "@/components/ButtonComponent"
-import Section from "@/components/Section"
-import { Box } from "@mui/material"
-import { Card, CardFooter, Image, Button } from "@nextui-org/react"
+'use client';
+import ButtonComponent from '@/components/Button';
+import Navbar from '@/components/Navbar';
+import Section from '@/components/Section';
+import { Box } from '@mui/material';
+import React from 'react';
 
 export default function Home() {
-  /* Refs */
+  /* states */
+  const [activeButton, setActiveButton] = React.useState<string>('home');
 
-  const homeRef = React.useRef<HTMLTableSectionElement | null>(null)
-  const aboutRef = React.useRef<HTMLTableSectionElement | null>(null)
-  const cvRef = React.useRef<HTMLTableSectionElement | null>(null)
-  const projectsRef = React.useRef<HTMLTableSectionElement | null>(null)
-  const contactsRef = React.useRef<HTMLTableSectionElement | null>(null)
+  /* Refs */
+  const homeRef = React.useRef<HTMLTableSectionElement | null>(null);
+  const aboutRef = React.useRef<HTMLTableSectionElement | null>(null);
+  const resumeRef = React.useRef<HTMLTableSectionElement | null>(null);
+  const projectRef = React.useRef<HTMLTableSectionElement | null>(null);
 
   return (
     <>
-      <Header>
-        <ButtonComponent
-          onClick={() => {
-            homeRef.current?.scrollIntoView({
-              behavior: "smooth",
-            })
-          }}
-        >
-          Home
-        </ButtonComponent>
-        <ButtonComponent
-          onClick={() => {
-            console.log(aboutRef.current)
-            aboutRef.current?.scrollIntoView({
-              behavior: "smooth",
-            })
-          }}
-        >
-          About Me
-        </ButtonComponent>
-        <ButtonComponent
-          onClick={() => {
-            cvRef.current?.scrollIntoView({
-              behavior: "smooth",
-            })
-          }}
-        >
-          CV
-        </ButtonComponent>
-        <ButtonComponent
-          onClick={() => {
-            projectsRef.current?.scrollIntoView({
-              behavior: "smooth",
-            })
-          }}
-        >
-          Projects
-        </ButtonComponent>
-        <ButtonComponent
-          onClick={() => {
-            contactsRef.current?.scrollIntoView({
-              behavior: "smooth",
-            })
-          }}
-        >
-          Contacts
-        </ButtonComponent>
-      </Header>
       <Box>
-        <Section ref={homeRef}>
-          Home  
-        </Section>
-        <Section ref={aboutRef}>About Me</Section>
-        <Section ref={cvRef}>CV</Section>
-        <Section ref={projectsRef}>Projects</Section>
-        <Section ref={contactsRef}>Contacts</Section>
+        <Box className='fixed top-0 left-0 w-full z-50'>
+          <Navbar>
+            <ButtonComponent
+              isActiv={activeButton === 'home'}
+              onClick={() => {
+                setActiveButton('home');
+                homeRef.current?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Home
+            </ButtonComponent>
+            <ButtonComponent
+              isActiv={activeButton === 'about'}
+              onClick={() => {
+                setActiveButton('about');
+                aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              About Me
+            </ButtonComponent>
+            <ButtonComponent
+              isActiv={activeButton === 'resume'}
+              onClick={() => {
+                setActiveButton('resume');
+                resumeRef.current?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Resume
+            </ButtonComponent>
+            <ButtonComponent
+              isActiv={activeButton === 'projects'}
+              onClick={() => {
+                setActiveButton('projects');
+                projectRef.current?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Projects
+            </ButtonComponent>
+          </Navbar>
+        </Box>
+        <Section ref={homeRef}>Home</Section>
+        <Section ref={aboutRef}>About</Section>
+        <Section ref={resumeRef}>Resume</Section>
+        <Section ref={projectRef}>Project</Section>
       </Box>
     </>
-  )
+  );
 }
