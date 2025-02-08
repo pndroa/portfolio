@@ -16,10 +16,11 @@ const Section: React.FC<SectionProps> = ({ children, sx, ...rest }) => {
       component='section'
       sx={mergeSx(
         {
-          width: '95%',
+          width: '70%',
           backgroundColor: 'black',
-          height: '50vh',
+          height: '40vh',
           marginTop: '2rem',
+          color: 'white',
         },
         sx
       )}
