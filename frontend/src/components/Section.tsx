@@ -8,12 +8,19 @@ interface SectionProps {
   children?: React.ReactNode
   height?: string
   sx?: SxProps<Theme>
+  id: string // id als Prop
 }
 
-const Section: React.FC<SectionProps> = ({ children, sx, height = '50vh' }) => {
+const Section: React.FC<SectionProps> = ({
+  children,
+  sx,
+  height = '50vh',
+  id,
+}) => {
   return (
     <Box
       component='section'
+      id={id} // id hier nutzen
       sx={mergeSx(
         {
           width: '95%',
