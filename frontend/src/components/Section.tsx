@@ -4,31 +4,26 @@ import { Box } from '@mui/material'
 import { SxProps, Theme } from '@mui/material/styles'
 import { mergeSx } from 'merge-sx'
 
-interface SectionProps {
+interface SectionProps extends React.HTMLAttributes<HTMLElement> {
   children?: React.ReactNode
   height?: string
   sx?: SxProps<Theme>
-  id: string // id als Prop
 }
 
-const Section: React.FC<SectionProps> = ({
-  children,
-  sx,
-  height = '50vh',
-  id,
-}) => {
+const Section: React.FC<SectionProps> = ({ children, sx, ...rest }) => {
   return (
     <Box
       component='section'
-      id={id} // id hier nutzen
       sx={mergeSx(
         {
           width: '95%',
-          height: height,
           backgroundColor: 'black',
+          height: '50vh',
+          marginTop: '2rem',
         },
         sx
       )}
+      {...rest}
     >
       {children}
     </Box>
