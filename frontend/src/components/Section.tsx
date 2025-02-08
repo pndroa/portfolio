@@ -21,6 +21,7 @@ const Section: React.FC<SectionProps> = ({ children, sx, ...rest }) => {
           height: '40vh',
           marginTop: '2rem',
           color: 'white',
+          borderRadius: '2rem',
         },
         sx
       )}

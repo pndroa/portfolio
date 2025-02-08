@@ -13,7 +13,7 @@ const Footer = () => {
         alignItems: 'center',
         gap: '2rem',
         paddingY: '1rem',
-        width: '95%',
+        width: '70%',
         marginLeft: 'auto',
         marginRight: 'auto',
         marginBottom: '1rem',
