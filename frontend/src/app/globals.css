@@ -2,8 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+  background: radial-gradient(circle at 30% 50%, #5548a5, #3a0066, #000000);
 }
