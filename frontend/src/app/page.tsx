@@ -48,6 +48,7 @@ export default function Home() {
         </Section>
         <Section id='projekte'>
           <Headline>Meine Projekte</Headline>
+          test commit laptop
         </Section>
       </MainContent>
       <Footer />
