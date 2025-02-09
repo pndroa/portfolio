@@ -10,13 +10,8 @@ const Section: React.FC<ComponentProps> = ({ children, sx, ...rest }) => {
       component='section'
       sx={mergeSx(
         {
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '10rem',
-          flexDirection: 'row',
           height: '40vh',
-          borderTop: 'solid',
+          //borderTop: 'solid',
         },
         sx
       )}

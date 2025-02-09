@@ -1,9 +1,10 @@
 'use client'
 import { Box } from '@mui/material'
-import React from 'react'
+import React, { forwardRef } from 'react'
 import Button from '@/components/Button'
 
-const Header = () => {
+// `forwardRef` verwenden, um das Ref an `Box` weiterzuleiten
+const Header = forwardRef<HTMLElement>((_, ref) => {
   return (
     <Box
       component='header'
@@ -14,6 +15,7 @@ const Header = () => {
         gap: '2rem',
         padding: '3rem',
       }}
+      ref={ref} // Hier wird das Ref richtig gesetzt
     >
       <Button targetId='ueberMich'>Über mich</Button>
       <Button targetId='ausbildung'>Ausbildung</Button>
@@ -22,6 +24,9 @@ const Header = () => {
       <Button targetId='projekte'>Projekte</Button>
     </Box>
   )
-}
+})
+
+// Display Name für Debugging
+Header.displayName = 'Header'
 
 export default Header
