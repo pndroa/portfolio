@@ -1,7 +1,7 @@
 'use client'
 import { Box } from '@mui/material'
 import React from 'react'
-import Button from '@/components/ButtonComponent'
+import Button from '@/components/Button'
 
 const Header = () => {
   return (
@@ -12,16 +12,13 @@ const Header = () => {
         justifyContent: 'flex-end',
         alignItems: 'center',
         gap: '2rem',
-        paddingY: '1rem',
-        width: '70%',
-        marginLeft: 'auto',
-        marginRight: 'auto',
+        padding: '3rem',
       }}
     >
       <Button targetId='ueberMich'>Über mich</Button>
       <Button targetId='ausbildung'>Ausbildung</Button>
       <Button targetId='berufserfahrung'>Berufserfahrung</Button>
-      <Button targetId='fähigkeiten'>Fähigkeiten</Button>
+      <Button targetId='faehigkeiten'>Fähigkeiten</Button>
       <Button targetId='projekte'>Projekte</Button>
     </Box>
   )

@@ -1,27 +1,17 @@
 'use client'
 import React from 'react'
 import { Box } from '@mui/material'
-import { SxProps, Theme } from '@mui/material/styles'
+import { ComponentProps } from '@/lib/types'
 import { mergeSx } from 'merge-sx'
 
-interface SectionProps extends React.HTMLAttributes<HTMLElement> {
-  children?: React.ReactNode
-  height?: string
-  sx?: SxProps<Theme>
-}
-
-const Section: React.FC<SectionProps> = ({ children, sx, ...rest }) => {
+const Section: React.FC<ComponentProps> = ({ children, sx, ...rest }) => {
   return (
     <Box
       component='section'
       sx={mergeSx(
         {
-          width: '70%',
-          backgroundColor: 'black',
           height: '40vh',
-          marginTop: '2rem',
-          color: 'white',
-          borderRadius: '2rem',
+          borderTop: 'solid',
         },
         sx
       )}
