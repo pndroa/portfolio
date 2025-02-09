@@ -1,42 +1,43 @@
-import React from 'react'
-import Headline from './Headline'
-import Section from './Section'
-import Text from './Text'
-import Box from '@mui/material/Box'
-import Image from 'next/image'
+import React from "react";
+import Headline from "./Headline";
+import Section from "./Section";
+import Text from "./Text";
+import Box from "@mui/material/Box";
+import Image from "next/image";
 
 const Main = () => {
   return (
     <>
       <Section
-        id='start'
+        id="start"
         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexWrap: 'wrap',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexWrap: "wrap",
+          marginTop: "5rem",
         }}
       >
         <Box
           sx={{
             //border: 'solid',
-            width: '60%',
-            height: '50%',
-            display: 'flex',
-            gap: '5rem',
+            width: "60%",
+            height: "50%",
+            display: "flex",
+            gap: "5rem",
           }}
         >
           <Box
             sx={{
               //background: 'blue',
-              width: '50%',
-              height: '100%',
-              display: 'flex',
-              justifyContent: 'space-evenly',
-              flexDirection: 'column',
+              width: "50%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "space-evenly",
+              flexDirection: "column",
             }}
           >
-            <Headline sx={{ width: '100%', height: '15%' }}>
+            <Headline sx={{ width: "100%", height: "35%" }}>
               Porfolio von Ergün Bickici
             </Headline>
             <Text>Softwareentwickler an der Hochschule Esslingen</Text>
@@ -44,53 +45,53 @@ const Main = () => {
           <Box
             sx={{
               //background: 'red',
-              width: '50%',
-              height: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              width: "50%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            <Image src='/cat.png' width={600} height={600} alt='cat' />
+            <Image src="/cat.png" width={600} height={600} alt="cat" />
           </Box>
         </Box>
       </Section>
 
       <Section
-        id='ueberMich'
+        id="ueberMich"
         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexWrap: 'wrap',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexWrap: "wrap",
         }}
       >
         <Box
           sx={{
             //background: 'blue',
             //border: 'solid',
-            width: '60%',
-            height: '50%',
+            width: "60%",
+            height: "50%",
           }}
         >
           <Headline>Über mich</Headline>
           <Box
             sx={{
               //background: 'green',
-              height: '75%',
-              display: 'flex',
-              gap: '5rem',
-              flexDirection: 'row',
-              alignItems: 'center',
+              height: "75%",
+              display: "flex",
+              gap: "5rem",
+              flexDirection: "row",
+              alignItems: "center",
             }}
           >
-            <Text sx={{ minWidth: '10%', maxWidth: '50%' }}>
+            <Text sx={{ minWidth: "10%", maxWidth: "50%" }}>
               Hallo! Ich bin Max Mustermann, ein angehender Softwareentwickler
               an der Hochschule Esslingen. Leidenschaftlich interessiert an der
               Entwicklung innovativer Softwarelösungen, strebe ich nach
               kreativen und praktischen Anwendungen der Technologie.
             </Text>
-            <Text sx={{ minWidth: '10%', maxWidth: '50%' }}>
+            <Text sx={{ minWidth: "10%", maxWidth: "50%" }}>
               Mein Fokus liegt auf der Erstellung effizienter und
               benutzerfreundlicher Software, die auf den neuesten Trends
               basiert. Durch meine Ausbildung und diverse Projekte konnte ich
@@ -101,7 +102,7 @@ const Main = () => {
         </Box>
       </Section>
 
-      <Section id='ausbildung'>
+      <Section id="ausbildung">
         <Headline>Ausbildung</Headline>
         <Text>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
@@ -110,7 +111,7 @@ const Main = () => {
           incidunt recusandae.
         </Text>
       </Section>
-      <Section id='berufserfahrung'>
+      <Section id="berufserfahrung">
         <Headline>Berufserfahrung</Headline>
         <Text>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
@@ -119,7 +120,7 @@ const Main = () => {
           incidunt recusandae.
         </Text>
       </Section>
-      <Section id='faehigkeiten'>
+      <Section id="faehigkeiten">
         <Headline>Fähigkeiten</Headline>
         <Text>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
@@ -128,7 +129,7 @@ const Main = () => {
           incidunt recusandae.
         </Text>
       </Section>
-      <Section id='projekte'>
+      <Section id="projekte">
         <Headline>Projekte</Headline>
         <Text>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
@@ -138,7 +139,7 @@ const Main = () => {
         </Text>
       </Section>
     </>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;
