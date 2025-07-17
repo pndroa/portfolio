@@ -19,7 +19,7 @@ This project showcases my development skills, education, and interests as a soft
 
 ### Prerequisites
 
-- [JDK 17+](https://adoptium.net/)
+- [JDK 21](https://adoptium.net/)
 - [Node.js + npm](https://nodejs.org/)
 - [Docker](https://docker.com) or [Podman](https://podman.io/)
 - [PostgreSQL image](https://hub.docker.com/_/postgres)
