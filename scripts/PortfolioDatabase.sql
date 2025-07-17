@@ -1,12 +1,16 @@
+-- Enable extension (if not already enabled)
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
 -- ENUM type
-CREATE TYPE "SkillLevel" AS ENUM (
+CREATE TYPE "skillLevel" AS ENUM (
   'beginner',
   'intermediate',
   'advanced'
 );
 
--- Portfolio table
-CREATE TABLE "Portfolio" (
+-- portfolio table
+CREATE TABLE "portfolio" (
   "id" UUID PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
   "title" VARCHAR NOT NULL,
   "slug" VARCHAR UNIQUE NOT NULL,
@@ -14,7 +18,7 @@ CREATE TABLE "Portfolio" (
 );
 
 -- User table
-CREATE TABLE "PortfolioUser" (
+CREATE TABLE "portfolioUser" (
   "id" UUID PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
   "portfolioId" UUID NOT NULL UNIQUE,
   "firstName" VARCHAR NOT NULL,
@@ -22,11 +26,11 @@ CREATE TABLE "PortfolioUser" (
   "job" VARCHAR,
   "fieldOfStudy" VARCHAR,
   "aboutMe" TEXT NOT NULL,
-  FOREIGN KEY ("portfolioId") REFERENCES "Portfolio" ("id")
+  FOREIGN KEY ("portfolioId") REFERENCES "portfolio" ("id")
 );
 
--- Education
-CREATE TABLE "Education" (
+-- education
+CREATE TABLE "education" (
   "id" UUID PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
   "userId" UUID NOT NULL,
   "institution" VARCHAR NOT NULL,
@@ -34,11 +38,11 @@ CREATE TABLE "Education" (
   "fieldOfStudy" VARCHAR,
   "startDate" DATE NOT NULL,
   "endDate" DATE NOT NULL,
-  FOREIGN KEY ("userId") REFERENCES "PortfolioUser" ("id")
+  FOREIGN KEY ("userId") REFERENCES "portfolioUser" ("id")
 );
 
--- Experience
-CREATE TABLE "Experience" (
+-- experience
+CREATE TABLE "experience" (
   "id" UUID PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
   "userId" UUID NOT NULL,
   "title" VARCHAR NOT NULL,
@@ -46,50 +50,50 @@ CREATE TABLE "Experience" (
   "description" TEXT,
   "startDate" DATE,
   "endDate" DATE,
-  FOREIGN KEY ("userId") REFERENCES "PortfolioUser" ("id")
+  FOREIGN KEY ("userId") REFERENCES "portfolioUser" ("id")
 );
 
--- Skill
-CREATE TABLE "Skill" (
+-- skill
+CREATE TABLE "skill" (
   "id" UUID PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
   "userId" UUID NOT NULL,
   "name" VARCHAR NOT NULL,
   "description" TEXT,
-  "level" "SkillLevel" NOT NULL,
-  FOREIGN KEY ("userId") REFERENCES "PortfolioUser" ("id")
+  "level" "skillLevel" NOT NULL,
+  FOREIGN KEY ("userId") REFERENCES "portfolioUser" ("id")
 );
 
--- Project
-CREATE TABLE "Project" (
+-- project
+CREATE TABLE "project" (
   "id" UUID PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
   "userId" UUID NOT NULL,
   "title" VARCHAR NOT NULL,
   "description" TEXT NOT NULL,
   "link" VARCHAR,
-  FOREIGN KEY ("userId") REFERENCES "PortfolioUser" ("id")
+  FOREIGN KEY ("userId") REFERENCES "portfolioUser" ("id")
 );
 
--- TechStack
-CREATE TABLE "TechStack" (
+-- techStack
+CREATE TABLE "techStack" (
   "id" UUID PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
   "projectId" UUID NOT NULL,
   "name" VARCHAR NOT NULL,
-  FOREIGN KEY ("projectId") REFERENCES "Project" ("id")
+  FOREIGN KEY ("projectId") REFERENCES "project" ("id")
 );
 
--- Contact
-CREATE TABLE "Contact" (
+-- contact
+CREATE TABLE "contact" (
   "id" UUID PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
   "userId" UUID NOT NULL,
   "email" VARCHAR,
-  FOREIGN KEY ("userId") REFERENCES "PortfolioUser" ("id")
+  FOREIGN KEY ("userId") REFERENCES "portfolioUser" ("id")
 );
 
--- SocialLink
-CREATE TABLE "SocialLink" (
+-- socialLink
+CREATE TABLE "socialLink" (
   "id" UUID PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
   "contactId" UUID NOT NULL,
   "platform" VARCHAR NOT NULL,
   "url" VARCHAR NOT NULL,
-  FOREIGN KEY ("contactId") REFERENCES "Contact" ("id")
+  FOREIGN KEY ("contactId") REFERENCES "contact" ("id")
 );
