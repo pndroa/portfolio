@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 data class MessageResponse(val message: String)
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/")
 class ApiController {
 
     @GetMapping("/")
