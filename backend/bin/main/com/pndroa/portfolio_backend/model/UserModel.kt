@@ -1,7 +1,6 @@
 package com.pndroa.portfolio_backend.model
 
 import jakarta.persistence.*
-import jakarta.validation.constraints.NotBlank
 import java.util.*
 
 @Entity

@@ -1,6 +1,6 @@
 package com.pndroa.portfolio_backend.dto
 
-import java.util.*
+import java.util.UUID
 import jakarta.validation.constraints.NotBlank
 
 data class UserDTO(
