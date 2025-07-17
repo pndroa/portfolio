@@ -26,7 +26,7 @@ class PortfolioController(private val portfolioRepository: PortfolioRepository) 
     }
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: UUID): ResponseEntity<PortfolioModel> {
+    fun getPortfolio(@PathVariable id: UUID): ResponseEntity<PortfolioModel> {
         val portfolio = portfolioRepository.findById(id)
             .orElseThrow { NotFoundException("Portfolio with ID $id not found") }
 

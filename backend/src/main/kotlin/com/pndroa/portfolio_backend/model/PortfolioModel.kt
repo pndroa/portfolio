@@ -7,7 +7,7 @@ import jakarta.persistence.*
 import java.util.*
 
 @Entity
-@Table(name = "portfolio", schema = "portfolioschema")
+@Table(name = "portfolio", schema = "portfolio_schema")
 data class PortfolioModel @JsonCreator(mode = JsonCreator.Mode.PROPERTIES) constructor(
 
     @Id
