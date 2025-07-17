@@ -1,0 +1,70 @@
+# === Gradle ===
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+gradle-app.setting
+gradle-app.properties
+
+# === Kotlin ===
+*.class
+*.kt~
+*.swp
+
+# === IntelliJ IDEA / JetBrains Rider ===
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# === VS Code ===
+.vscode/
+
+# === OS ===
+.DS_Store
+Thumbs.db
+
+# === Logs ===
+*.log
+
+# === Temporary files ===
+*.tmp
+*.temp
+*.bak
+*.orig
+
+# === Environment files ===
+.env
+.env.*
+
+# === Test reports ===
+test-results/
+test-output/
+*.xml
+
+# === Spring Boot specific ===
+*.jar
+*.war
+*.ear
+
+# === Local dev overrides ===
+application-local.properties
+application-dev.properties
+
+# === Sonar / Code analysis ===
+.sonar/
+coverage/
+jacoco.exec
+*.ec
+*.exec
+
+# === Database / IDE Metadata ===
+*.db
+*.h2.db
+*.mv.db
+
+# === Linux backup files ===
+*~
+
+# === Other ===
+HELP.md
