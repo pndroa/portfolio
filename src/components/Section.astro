@@ -1,0 +1,38 @@
+---
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<section id={id}>
+  <slot />
+</section>
+
+<style>
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100dvh;
+    padding: 6rem 1.5rem;
+    text-align: center;
+  }
+
+  section {
+    position: relative;
+  }
+
+  section + section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: var(--content-width);
+    height: 1px;
+    transform: translateX(-50%);
+    background-color: rgb(255 255 255 / 0.08);
+  }
+</style>

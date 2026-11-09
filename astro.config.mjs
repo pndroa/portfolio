@@ -1,7 +1,9 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 
-// https://astro.build/config
+import react from "@astrojs/react";
+import tailwindcss from "@tailwindcss/vite";
+
 export default defineConfig({
   site: "https://erguen-bickici.de",
 
@@ -9,7 +11,14 @@ export default defineConfig({
     locales: ["de", "en"],
     defaultLocale: "de",
     routing: {
-      prefixDefaultLocale: false,
+      prefixDefaultLocale: true,
+      redirectToDefaultLocale: false,
     },
+  },
+
+  integrations: [react()],
+
+  vite: {
+    plugins: [tailwindcss()],
   },
 });
