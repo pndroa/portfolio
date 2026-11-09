@@ -1,0 +1,175 @@
+---
+import { Briefcase, Mail } from "@lucide/astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { siGithub } from "simple-icons";
+import { site } from "../data/site";
+import { nav, navigationItems, type Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const labels = {
+  de: {
+    aboutTitle: "Über mich",
+    aboutText: "Student der Softwaretechnik an der Hochschule Esslingen.",
+    quickTitle: "Schnellzugriff",
+    privacy: "Datenschutz",
+    privacyHref: "/de/datenschutz",
+    connectTitle: "Kontakt",
+    rights: "Alle Rechte vorbehalten.",
+  },
+  en: {
+    aboutTitle: "About me",
+    aboutText: "Software engineering student at Hochschule Esslingen.",
+    quickTitle: "Quick links",
+    privacy: "Privacy policy",
+    privacyHref: "/en/privacy",
+    connectTitle: "Connect",
+    rights: "All rights reserved.",
+  },
+};
+
+const t = labels[lang];
+const year = new Date().getFullYear();
+const homeHref = getRelativeLocaleUrl(lang);
+---
+
+<footer>
+  <div class="footer-inner">
+    <div class="columns">
+      <section>
+        <h2>{t.aboutTitle}</h2>
+        <p>{t.aboutText}</p>
+      </section>
+
+      <section>
+        <h2>{t.quickTitle}</h2>
+        <nav aria-label={t.quickTitle}>
+          <ul>
+            {
+              navigationItems.map((item) => (
+                <li>
+                  <a href={`${homeHref}#${item}`}>{nav[lang][item]}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </section>
+
+      <section class="connect">
+        <h2>{t.connectTitle}</h2>
+        <ul>
+          <li>
+            <a href={site.github} target="_blank" rel="noopener noreferrer">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d={siGithub.path}></path>
+              </svg>
+              GitHub
+            </a>
+          </li>
+          <li>
+            <a href={site.linkedin} target="_blank" rel="noopener noreferrer">
+              <Briefcase size={16} aria-hidden="true" />
+              LinkedIn
+            </a>
+          </li>
+          <li>
+            <a href={`mailto:${site.email}`}>
+              <Mail size={16} aria-hidden="true" />
+              E-Mail
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="bottom">
+      <p>© {year} {site.name}. {t.rights}</p>
+      <a href={t.privacyHref}>{t.privacy}</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background-color: rgb(8 13 27 / 0.8);
+    border-top: 1px solid rgb(255 255 255 / 0.1);
+  }
+
+  .footer-inner {
+    max-width: 75rem;
+    margin-inline: auto;
+    padding: 1rem 1.5rem 1.5rem;
+  }
+
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 1.75rem 2.5rem;
+  }
+
+  h2 {
+    margin: 0 0 0.6rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+  }
+
+  p,
+  a {
+    font-size: 0.95rem;
+    color: #94a3b8;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .connect ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.25rem;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+  }
+
+  a:hover,
+  a:focus-visible {
+    color: white;
+  }
+
+  .bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem 1.5rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgb(255 255 255 / 0.1);
+  }
+
+  .bottom p,
+  .bottom a {
+    font-size: 0.875rem;
+  }
+</style>

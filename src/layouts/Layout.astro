@@ -1,0 +1,113 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { BackgroundGradientAnimation } from "../components/ui/background-gradient-animation";
+import "@fontsource-variable/plus-jakarta-sans";
+import "@fontsource/maple-mono/400.css";
+import "@fontsource/maple-mono/600.css";
+import "../styles/global.css";
+import type { Lang } from "../i18n/ui";
+
+interface Props {
+  title: string;
+  lang: Lang;
+  alternateHref?: string;
+}
+
+const { title, lang, alternateHref } = Astro.props;
+---
+
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="flex min-h-dvh flex-col">
+    <BackgroundGradientAnimation
+      client:load
+      interactive={false}
+      containerClassName="fixed inset-0 -z-10 h-dvh w-full"
+    />
+    <Header lang={lang} alternateHref={alternateHref} />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+
+    <script>
+      const DURATION = 900;
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let frame = 0;
+
+      const easeInOutCubic = (t: number) =>
+        t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+      const stop = () => cancelAnimationFrame(frame);
+
+      const scrollToTarget = (target: HTMLElement) => {
+        stop();
+        const start = window.scrollY;
+        const maxScroll =
+          document.documentElement.scrollHeight - window.innerHeight;
+        const end = Math.min(
+          target.getBoundingClientRect().top + start,
+          maxScroll,
+        );
+        const startTime = performance.now();
+
+        const step = (now: number) => {
+          const progress = Math.min((now - startTime) / DURATION, 1);
+          window.scrollTo({
+            top: start + (end - start) * easeInOutCubic(progress),
+            behavior: "instant",
+          });
+          if (progress < 1) frame = requestAnimationFrame(step);
+        };
+
+        frame = requestAnimationFrame(step);
+      };
+
+      document.addEventListener("click", (event) => {
+        if (
+          reduceMotion.matches ||
+          event.defaultPrevented ||
+          event.button !== 0 ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey
+        ) {
+          return;
+        }
+
+        const link = (event.target as HTMLElement).closest<HTMLAnchorElement>(
+          "a[href*='#']",
+        );
+        if (!link) return;
+
+        const url = new URL(link.href);
+        if (url.pathname !== location.pathname || !url.hash) return;
+
+        const target = document.getElementById(
+          decodeURIComponent(url.hash.slice(1)),
+        );
+        if (!target) return;
+
+        event.preventDefault();
+        if (location.hash !== url.hash) history.pushState(null, "", url.hash);
+        scrollToTarget(target);
+
+        if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+        target.focus({ preventScroll: true });
+      });
+
+      for (const type of ["wheel", "touchstart", "keydown"]) {
+        window.addEventListener(type, stop, { passive: true });
+      }
+    </script>
+  </body>
+</html>
