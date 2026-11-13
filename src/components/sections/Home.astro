@@ -87,4 +87,26 @@ const introduction = {
     object-fit: cover;
     border-radius: 50%;
   }
+
+  @media (max-width: 60rem) {
+    .home-container {
+      flex-direction: column-reverse;
+      gap: 2.5rem;
+      width: var(--content-width);
+      padding-block: 6rem 3rem;
+      text-align: center;
+    }
+
+    .greeting-container {
+      align-items: center;
+    }
+
+    .introduction {
+      font-size: clamp(1.125rem, 4.5vw, 1.375rem);
+    }
+
+    .profile-picture {
+      width: clamp(10rem, 45vw, 16rem);
+    }
+  }
 </style>
