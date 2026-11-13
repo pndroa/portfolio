@@ -1,9 +1,9 @@
 ---
+import { site } from "@/data/site";
+import { nav, navigationItems, type Lang } from "@/i18n/ui";
 import { Briefcase, Mail } from "@lucide/astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { siGithub } from "simple-icons";
-import { site } from "../data/site";
-import { nav, navigationItems, type Lang } from "../i18n/ui";
 
 interface Props {
   lang: Lang;
@@ -49,13 +49,11 @@ const homeHref = getRelativeLocaleUrl(lang);
         <h2>{t.quickTitle}</h2>
         <nav aria-label={t.quickTitle}>
           <ul>
-            {
-              navigationItems.map((item) => (
-                <li>
-                  <a href={`${homeHref}#${item}`}>{nav[lang][item]}</a>
-                </li>
-              ))
-            }
+            {navigationItems.map((item) => (
+              <li>
+                <a href={`${homeHref}#${item}`}>{nav[lang][item]}</a>
+              </li>
+            ))}
           </ul>
         </nav>
       </section>
@@ -94,7 +92,9 @@ const homeHref = getRelativeLocaleUrl(lang);
     </div>
 
     <div class="bottom">
-      <p>© {year} {site.name}. {t.rights}</p>
+      <p>
+        © {year} {site.name}. {t.rights}
+      </p>
       <a href={t.privacyHref}>{t.privacy}</a>
     </div>
   </div>

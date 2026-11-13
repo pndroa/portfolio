@@ -1,0 +1,28 @@
+---
+import Section from "@/components/Section.astro";
+import { nav, type Lang } from "@/i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<Section id="experience">
+  <div class="experience-container">
+    <h2 class="gradient-text">{nav[lang].experience}</h2>
+  </div>
+</Section>
+
+<style>
+  .experience-container {
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    width: 75%;
+    margin-inline: auto;
+  }
+</style>

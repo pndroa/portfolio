@@ -1,8 +1,8 @@
 ---
+import { site } from "@/data/site";
+import { nav, navigationItems, type Lang } from "@/i18n/ui";
 import { ChevronDown, Download, Languages } from "@lucide/astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { site } from "../data/site";
-import { nav, navigationItems, type Lang } from "../i18n/ui";
 
 interface Props {
   lang: Lang;
@@ -45,13 +45,11 @@ const homeHref = getRelativeLocaleUrl(lang);
     <div class="header-right">
       <nav class="menu" id="site-menu" aria-label={t.navAria}>
         <ul>
-          {
-            navigationItems.map((item) => (
-              <li>
-                <a href={`${homeHref}#${item}`}>{nav[lang][item]}</a>
-              </li>
-            ))
-          }
+          {navigationItems.map((item) => (
+            <li>
+              <a href={`${homeHref}#${item}`}>{nav[lang][item]}</a>
+            </li>
+          ))}
         </ul>
       </nav>
 

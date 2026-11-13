@@ -1,10 +1,10 @@
 ---
+import profilePicture from "@/assets/icon.jpeg";
+import Section from "@/components/Section.astro";
+import TextType from "@/components/ui/TextType";
+import TrueFocus from "@/components/ui/TrueFocus";
+import type { Lang } from "@/i18n/ui";
 import { Image } from "astro:assets";
-import profilePicture from "../assets/icon.jpeg";
-import { nav, navigationItems, type Lang } from "../i18n/ui";
-import Section from "./Section.astro";
-import TextType from "./ui/TextType";
-import TrueFocus from "./ui/TrueFocus";
 
 interface Props {
   lang: Lang;
@@ -17,8 +17,6 @@ const introduction = {
   de: "Ich entwickle *Fullstack-Anwendungen* und *KI-Systeme*, von klassischen *Web-Apps* bis zu *Agentic AI*. Aktuell studiere ich Softwaretechnik im letzten Semester an der Hochschule Esslingen.",
   en: "I build *full-stack applications* and *AI systems*, from classic *web apps* to *agentic AI*. Currently in my final semester of Software Engineering at Esslingen University of Applied Sciences.",
 };
-
-const sections = navigationItems.filter((item) => item !== "home");
 ---
 
 <Section id="home">
@@ -52,12 +50,6 @@ const sections = navigationItems.filter((item) => item !== "home");
     </div>
   </div>
 </Section>
-
-{sections.map((item) => (
-  <Section id={item}>
-    <h2 class="gradient-text">{nav[lang][item]}</h2>
-  </Section>
-))}
 
 <style>
   .home-container {
