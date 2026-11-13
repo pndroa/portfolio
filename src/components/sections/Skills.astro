@@ -1,17 +1,187 @@
 ---
 import Section from "@/components/Section.astro";
+import SpotlightCard from "@/components/ui/SpotlightCard";
 import { nav, type Lang } from "@/i18n/ui";
+import {
+  Code,
+  Container,
+  Database,
+  FileSearch,
+  FileText,
+  Kanban,
+  ListOrdered,
+  Plug,
+  Repeat,
+  Sheet,
+  Workflow,
+} from "@lucide/astro";
+import * as simpleIcons from "simple-icons";
 
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
+
+type BrandIcon = { hex: string; path: string };
+
+type Skill = {
+  name: string | Record<Lang, string>;
+  slug?: string;
+  icon?: typeof Code;
+};
+
+const subtitle = {
+  de: "Technologien und Methoden, mit denen ich bereits gearbeitet habe",
+  en: "Technologies and methods I have worked with",
+};
+
+const categories: { title: Record<Lang, string>; skills: Skill[] }[] = [
+  {
+    title: { de: "Sprachen", en: "Languages" },
+    skills: [
+      { name: "Python", slug: "python" },
+      { name: "Java", slug: "openjdk" },
+      { name: "Kotlin", slug: "kotlin" },
+      { name: "C", slug: "c" },
+      { name: "C++", slug: "cplusplus" },
+      { name: "JavaScript", slug: "javascript" },
+      { name: "TypeScript", slug: "typescript" },
+      { name: "HTML", slug: "html5" },
+      { name: "CSS", slug: "css" },
+    ],
+  },
+  {
+    title: { de: "Frameworks & Bibliotheken", en: "Frameworks & Libraries" },
+    skills: [
+      { name: "React", slug: "react" },
+      { name: "Next.js", slug: "nextdotjs" },
+      { name: "Spring Boot", slug: "springboot" },
+      { name: "FastAPI", slug: "fastapi" },
+      { name: "Pydantic", slug: "pydantic" },
+      { name: "Pandas", slug: "pandas" },
+      { name: "openpyxl", icon: Sheet },
+    ],
+  },
+  {
+    title: { de: "KI & Agentic AI", en: "AI & Agentic AI" },
+    skills: [
+      { name: "LangChain", slug: "langchain" },
+      { name: "LangGraph", slug: "langgraph", icon: Workflow },
+      { name: "MCP", slug: "modelcontextprotocol", icon: Plug },
+      { name: "Claude Code", slug: "claude" },
+      { name: "n8n", slug: "n8n" },
+      { name: "Docling", icon: FileSearch },
+    ],
+  },
+  {
+    title: { de: "Datenbanken", en: "Databases" },
+    skills: [
+      { name: "SQL", icon: Database },
+      { name: "PostgreSQL", slug: "postgresql" },
+      { name: "Db2", slug: "ibm", icon: Database },
+      { name: "Supabase", slug: "supabase" },
+    ],
+  },
+  {
+    title: { de: "DevOps & Infrastruktur", en: "DevOps & Infrastructure" },
+    skills: [
+      { name: "Linux", slug: "linux" },
+      { name: "Docker", slug: "docker" },
+      { name: "Kubernetes / K3s", slug: "kubernetes" },
+      { name: "Harbor", slug: "harbor", icon: Container },
+      { name: "Jenkins", slug: "jenkins" },
+      { name: "Git", slug: "git" },
+      { name: "GitHub", slug: "github" },
+    ],
+  },
+  {
+    title: {
+      de: "Zusammenarbeit & Projektmanagement",
+      en: "Collaboration & Projectmanagement",
+    },
+    skills: [
+      { name: "Jira", slug: "jira" },
+      { name: "Confluence", slug: "confluence" },
+      { name: "Microsoft Office", icon: FileText },
+      { name: "Scrum", icon: Repeat },
+      { name: "Kanban", icon: Kanban },
+      { name: { de: "Wasserfall", en: "Waterfall" }, icon: ListOrdered },
+    ],
+  },
+];
+
+const brand = (slug: string) => {
+  const key = `si${slug.charAt(0).toUpperCase()}${slug.slice(1)}`;
+  return (simpleIcons as unknown as Record<string, BrandIcon | undefined>)[key];
+};
+
+const readable = (hex: string) => {
+  const [r, g, b] = [0, 2, 4].map(
+    (index) => parseInt(hex.slice(index, index + 2), 16) / 255,
+  );
+  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  return luminance < 0.2 ? "#ffffff" : `#${hex}`;
+};
+
+const resolved = categories.map((category) => ({
+  title: category.title[lang],
+  skills: category.skills.map((skill) => {
+    const icon = skill.slug ? brand(skill.slug) : undefined;
+    return {
+      name: typeof skill.name === "string" ? skill.name : skill.name[lang],
+      path: icon?.path,
+      color: icon ? readable(icon.hex) : "var(--accent-from)",
+      Fallback: skill.icon ?? Code,
+    };
+  }),
+}));
 ---
 
 <Section id="skills">
   <div class="skills-container">
-    <h2 class="gradient-text">{nav[lang].skills}</h2>
+    <div class="skills-header">
+      <h2 class="skills-title gradient-text">{nav[lang].skills}</h2>
+      <p class="skills-subtitle">{subtitle[lang]}</p>
+    </div>
+
+    <div class="skill-categories">
+      {resolved.map((category) => (
+        <div class="skill-category">
+          <h3 class="skill-category-title">{category.title}</h3>
+          <ul class="skills-grid">
+            {category.skills.map(({ name, path, color, Fallback }) => (
+              <li>
+                <SpotlightCard
+                  client:visible
+                  className="skill-card"
+                  spotlightColor="rgb(255 255 255)"
+                  intensity={0.06}
+                  borderGlow={0.25}
+                  spotlightSize={160}
+                  proximity={0}
+                >
+                  <span class="skill-icon" style={`--brand: ${color}`}>
+                    {path ? (
+                      <svg
+                        class="brand-icon"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path d={path} />
+                      </svg>
+                    ) : (
+                      <Fallback size={22} aria-hidden="true" />
+                    )}
+                  </span>
+                  <span class="skill-name">{name}</span>
+                </SpotlightCard>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
   </div>
 </Section>
 
@@ -19,10 +189,115 @@ const { lang } = Astro.props;
   .skills-container {
     min-height: 100dvh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 4rem;
-    width: 75%;
-    margin-inline: auto;
+    gap: 3rem;
+    padding-block: 6rem;
+  }
+
+  .skills-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: var(--content-width);
+    text-align: center;
+  }
+
+  .skills-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .skills-subtitle {
+    font-size: 1.125rem;
+    color: rgb(255 255 255 / 0.6);
+  }
+
+  .skill-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    width: var(--content-width);
+  }
+
+  .skill-category-title {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: rgb(255 255 255 / 0.85);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .skills-grid :global(.skill-card) {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    height: 100%;
+    padding: 0.875rem;
+    border-radius: 1rem;
+  }
+
+  .skill-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.75rem;
+    color: rgb(255 255 255 / 0.7);
+    background-color: rgb(255 255 255 / 0.05);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    transition:
+      color 0.3s ease,
+      background-color 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  .brand-icon {
+    width: 1.375rem;
+    height: 1.375rem;
+    fill: currentColor;
+  }
+
+  .skill-name {
+    min-width: 0;
+    font-weight: 600;
+    color: rgb(255 255 255 / 0.8);
+    overflow-wrap: anywhere;
+    transition: color 0.3s ease;
+  }
+
+  .skills-grid :global(.skill-card:hover) .skill-icon {
+    color: var(--brand);
+    background-color: color-mix(in srgb, var(--brand) 12%, transparent);
+    border-color: color-mix(in srgb, var(--brand) 30%, transparent);
+  }
+
+  .skills-grid :global(.skill-card:hover) .skill-name {
+    color: white;
+  }
+
+  @media (max-width: 40rem) {
+    .skills-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .skill-icon,
+    .skill-name {
+      transition: none;
+    }
   }
 </style>
