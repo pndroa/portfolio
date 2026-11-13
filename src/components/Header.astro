@@ -1,8 +1,11 @@
 ---
-import { ChevronDown, Download, Languages } from "@lucide/astro";
+import profilePicture from "@/assets/icon.jpeg";
+import CardNav from "@/components/ui/CardNav";
+import { site } from "@/data/site";
+import { nav, navigationItems, type Lang, type NavItem } from "@/i18n/ui";
+import { Download, Languages } from "@lucide/astro";
+import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { site } from "../data/site";
-import { nav, navigationItems, type Lang } from "../i18n/ui";
 
 interface Props {
   lang: Lang;
@@ -14,19 +17,43 @@ const { lang, alternateHref } = Astro.props;
 const labels = {
   de: {
     navAria: "Hauptnavigation",
-    menu: "Menü",
+    home: "Ergün Bickici, zur Startseite",
+    menu: "Menü öffnen",
+    close: "Menü schließen",
     cv: "Lebenslauf",
     cvAria: "Lebenslauf als PDF herunterladen",
+    cvTitle: "Lebenslauf",
+    cvDescription: "Alle Stationen kompakt als PDF",
+    cvDownload: "Herunterladen",
     switchTo: "EN",
     switchAria: "Switch to English",
+    overview: "Überblick",
+    overviewDescription: "Wer ich bin und was ich mache",
+    experience: "Erfahrung",
+    experienceDescription: "Was ich kann und wo ich es gelernt habe",
+    connect: "Vernetzen",
+    connectDescription: "Schreib mir gerne",
+    email: "E-Mail",
   },
   en: {
     navAria: "Main navigation",
-    menu: "Menu",
+    home: "Ergün Bickici, go to homepage",
+    menu: "Open menu",
+    close: "Close menu",
     cv: "Download CV",
     cvAria: "Download CV as PDF",
+    cvTitle: "CV",
+    cvDescription: "Everything at a glance as a PDF",
+    cvDownload: "Download",
     switchTo: "DE",
     switchAria: "Auf Deutsch wechseln",
+    overview: "Overview",
+    overviewDescription: "Who I am and what I do",
+    experience: "Experience",
+    experienceDescription: "What I can do and where I learned it",
+    connect: "Connect",
+    connectDescription: "Feel free to reach out",
+    email: "Email",
   },
 };
 
@@ -34,44 +61,85 @@ const t = labels[lang];
 const otherLang = lang === "de" ? "en" : "de";
 const otherLangHref = alternateHref ?? getRelativeLocaleUrl(otherLang);
 const homeHref = getRelativeLocaleUrl(lang);
+const cvHref = "/cv.pdf";
+
+const section = (id: NavItem) => ({
+  label: nav[lang][id],
+  href: `${homeHref}#${id}`,
+});
+
+const links = navigationItems.map(section);
+
+const items = [
+  {
+    label: t.overview,
+    description: t.overviewDescription,
+    links: [section("home"), section("about")],
+  },
+  {
+    label: t.experience,
+    description: t.experienceDescription,
+    links: [section("skills"), section("experience")],
+  },
+  {
+    label: t.connect,
+    description: t.connectDescription,
+    links: [
+      section("contact"),
+      { label: t.email, href: `mailto:${site.email}` },
+      { label: "GitHub", href: site.github, external: true },
+      { label: "LinkedIn", href: site.linkedin, external: true },
+    ],
+  },
+  {
+    label: t.cvTitle,
+    description: t.cvDescription,
+    mobileOnly: true,
+    links: [
+      {
+        label: t.cvDownload,
+        href: cvHref,
+        ariaLabel: t.cvAria,
+        download: true,
+      },
+    ],
+  },
+];
 ---
 
-<header>
-  <div class="header-box">
-    <a class="header-left" href={`${homeHref}#home`}>
-      <span class="name">{site.name}</span>
-    </a>
+<header class="site-header">
+  <CardNav
+    client:load
+    brand={t.home}
+    brandHref={`${homeHref}#home`}
+    links={links}
+    items={items}
+    menuText={t.menu}
+    closeText={t.close}
+    ariaLabel={t.navAria}
+  >
+    <span slot="logo" class="brand">
+      <span class="avatar">
+        <Image
+          src={profilePicture}
+          alt=""
+          width={80}
+          height={80}
+          loading="eager"
+          class="avatar-image"
+        />
+      </span>
+      <span class="brand-name">{site.name}</span>
+    </span>
 
-    <div class="header-right">
-      <nav class="menu" id="site-menu" aria-label={t.navAria}>
-        <ul>
-          {
-            navigationItems.map((item) => (
-              <li>
-                <a href={`${homeHref}#${item}`}>{nav[lang][item]}</a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
-
-      <button
-        type="button"
-        class="menu-toggle"
-        aria-label={t.menu}
-        aria-expanded="false"
-        aria-controls="site-menu"
-      >
-        <ChevronDown size={20} aria-hidden="true" />
-      </button>
-
-      <a class="cv" href="/cv.pdf" download aria-label={t.cvAria}>
+    <div slot="actions" class="header-actions">
+      <a class="pill cv" href={cvHref} download aria-label={t.cvAria}>
         <Download size={16} aria-hidden="true" />
-        <span class="label">{t.cv}</span>
+        <span>{t.cv}</span>
       </a>
 
       <a
-        class="lang"
+        class="pill lang"
         href={otherLangHref}
         hreflang={otherLang}
         lang={otherLang}
@@ -81,190 +149,70 @@ const homeHref = getRelativeLocaleUrl(lang);
         <span>{t.switchTo}</span>
       </a>
     </div>
-  </div>
+  </CardNav>
 </header>
 
 <style>
-  header {
+  .site-header {
     position: fixed;
     top: 1.5rem;
     left: 0;
     right: 0;
     z-index: 10;
     width: var(--content-width);
-    height: 3.5rem;
     margin-inline: auto;
-    background-color: rgb(8 13 27 / 0.05);
-    backdrop-filter: blur(4px) saturate(1.5);
-    border: 1px solid rgb(255 255 255 / 0.1);
-    border-radius: 999px;
-    box-shadow: 0 4px 24px rgb(0 0 0 / 0.3);
   }
 
-  .header-box {
-    display: flex;
+  .brand {
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .avatar {
+    display: block;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+  }
+
+  .avatar-image {
+    display: block;
+    width: 100%;
     height: 100%;
-    padding-inline: 1.5rem;
+    border-radius: 50%;
+    object-fit: cover;
   }
 
-  .header-left,
-  .header-right,
-  .menu ul {
+  .header-actions {
     display: flex;
     align-items: center;
+    gap: 0.5rem;
   }
 
-  .header-right {
-    gap: 1.5rem;
-  }
-
-  .menu ul {
-    gap: 1.5rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .menu a {
-    color: rgb(255 255 255 / 0.75);
-    font-weight: 600;
-  }
-
-  .menu a:hover,
-  .menu a:focus-visible {
-    color: white;
-  }
-
-  .name {
-    font-weight: 700;
-  }
-
-  .cv,
-  .lang {
+  .pill {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    padding: 0.35rem 0.9rem;
+    height: 2.25rem;
+    padding-inline: 0.9rem;
     border: 1px solid rgb(255 255 255 / 0.2);
     border-radius: 999px;
+    color: inherit;
     font-size: 0.875rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
   }
 
-  .cv:hover,
-  .lang:hover {
+  .pill:hover,
+  .pill:focus-visible {
     background-color: rgb(255 255 255 / 0.1);
   }
 
-  .menu-toggle {
-    display: none;
-    padding: 0.4rem;
-    color: inherit;
-    background: none;
-    border: 1px solid rgb(255 255 255 / 0.2);
-    border-radius: 999px;
-    cursor: pointer;
-  }
-
-  .menu-toggle :global(svg) {
-    transition: transform 0.2s;
-  }
-
-  .menu-toggle[aria-expanded="true"] :global(svg) {
-    transform: rotate(180deg);
-  }
-
-  @media (max-width: 60rem) {
-    .header-right {
-      gap: 0.5rem;
-    }
-
-    .menu-toggle {
-      display: inline-flex;
-    }
-
-    .menu {
-      display: none;
-    }
-
-    .menu[data-open] {
-      display: block;
-      position: absolute;
-      top: calc(100% + 0.75rem);
-      right: 0;
-      width: min(18rem, 100%);
-      padding: 0.5rem;
-      background-color: rgb(10 14 26 / 0.95);
-      border: 1px solid rgb(255 255 255 / 0.1);
-      border-radius: 1.25rem;
-    }
-
-    .menu[data-open] ul {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0;
-    }
-
-    .menu[data-open] a {
-      display: block;
-      padding: 0.6rem 0.75rem;
-    }
-  }
-
-  @media (max-width: 40rem) {
-    .header-box {
-      padding-inline: 1rem;
-    }
-
-    .cv .label,
-    .lang :global(svg) {
-      display: none;
-    }
-
+  @container card-nav (max-width: 56rem) {
+    .brand-name,
     .cv {
-      padding: 0.45rem;
+      display: none;
     }
   }
 </style>
-
-<script>
-  const header = document.querySelector("header");
-  const toggle = header?.querySelector<HTMLButtonElement>(".menu-toggle");
-  const menu = header?.querySelector<HTMLElement>(".menu");
-
-  if (header && toggle && menu) {
-    const setOpen = (open: boolean) => {
-      menu.toggleAttribute("data-open", open);
-      toggle.setAttribute("aria-expanded", String(open));
-    };
-
-    toggle.addEventListener("click", () => {
-      setOpen(!menu.hasAttribute("data-open"));
-    });
-
-    menu.addEventListener("click", (event) => {
-      if ((event.target as HTMLElement).closest("a")) setOpen(false);
-    });
-
-    document.addEventListener("click", (event) => {
-      if (!header.contains(event.target as Node)) setOpen(false);
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && menu.hasAttribute("data-open")) {
-        setOpen(false);
-        toggle.focus();
-      }
-    });
-
-    window.matchMedia("(max-width: 60rem)").addEventListener("change", () => {
-      setOpen(false);
-    });
-  }
-</script>

@@ -1,0 +1,52 @@
+.focus-container {
+  position: relative;
+  display: block;
+}
+
+.focus-word {
+  white-space: nowrap;
+}
+
+.focus-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.corner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: var(--corner-size);
+  height: var(--corner-size);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 3px;
+  filter: drop-shadow(0 0 4px var(--glow-color));
+}
+
+.top-right,
+.bottom-right {
+  --border-color: var(--accent-to);
+}
+
+.top-left {
+  border-right: none;
+  border-bottom: none;
+}
+
+.top-right {
+  border-left: none;
+  border-bottom: none;
+}
+
+.bottom-left {
+  border-right: none;
+  border-top: none;
+}
+
+.bottom-right {
+  border-left: none;
+  border-top: none;
+}

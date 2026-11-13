@@ -1,0 +1,112 @@
+---
+import profilePicture from "@/assets/icon.jpeg";
+import Section from "@/components/Section.astro";
+import TextType from "@/components/ui/TextType";
+import TrueFocus from "@/components/ui/TrueFocus";
+import type { Lang } from "@/i18n/ui";
+import { Image } from "astro:assets";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const greeting = { de: "Hi, ich bin", en: "Hi, I'm" };
+const introduction = {
+  de: "Ich entwickle *Fullstack-Anwendungen* und *KI-Systeme*, von klassischen *Web-Apps* bis zu *Agentic AI*. Aktuell studiere ich Softwaretechnik im letzten Semester an der Hochschule Esslingen.",
+  en: "I build *full-stack applications* and *AI systems*, from classic *web apps* to *agentic AI*. Currently in my final semester of Software Engineering at Esslingen University of Applied Sciences.",
+};
+---
+
+<Section id="home">
+  <div class="home-container">
+    <div class="greeting-container">
+      <h1 class="greeting">
+        <TextType
+          client:load
+          as="span"
+          text={`${greeting[lang]} Ergün`}
+          highlight="Ergün"
+          loop={false}
+          typingSpeed={75}
+          initialDelay={300}
+          cursorStyle="bar"
+          cursorColor="var(--accent-to)"
+        />
+      </h1>
+      <p class="introduction">
+        <TrueFocus client:load text={introduction[lang]} />
+      </p>
+    </div>
+    <div class="profile-picture-container">
+      <Image
+        src={profilePicture}
+        alt="Porträt von Ergün Bickici"
+        width={800}
+        class="profile-picture"
+        loading="eager"
+      />
+    </div>
+  </div>
+</Section>
+
+<style>
+  .home-container {
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    width: 75%;
+    margin-inline: auto;
+  }
+
+  .greeting-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .greeting {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .introduction {
+    font-size: clamp(1.375rem, 2.2vw, 2rem);
+    line-height: 1.6;
+    max-width: 45ch;
+  }
+
+  .profile-picture {
+    width: clamp(18rem, 38vw, 34rem);
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  @media (max-width: 60rem) {
+    .home-container {
+      flex-direction: column-reverse;
+      gap: 2.5rem;
+      width: var(--content-width);
+      padding-block: 6rem 3rem;
+      text-align: center;
+    }
+
+    .greeting-container {
+      align-items: center;
+    }
+
+    .introduction {
+      font-size: clamp(1.125rem, 4.5vw, 1.375rem);
+    }
+
+    .profile-picture {
+      width: clamp(10rem, 45vw, 16rem);
+    }
+  }
+</style>

@@ -1,0 +1,185 @@
+---
+import Section from "@/components/Section.astro";
+import SpotlightCard from "@/components/ui/SpotlightCard";
+import { nav, type Lang } from "@/i18n/ui";
+import { Brain, CodeXml, Heart } from "@lucide/astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const highlight = (text: string) =>
+  text.replace(/\*(.+?)\*/g, '<span class="card-highlight">$1</span>');
+
+const cards = [
+  {
+    icon: Brain,
+    color: "from",
+    title: { de: "Ausbildung", en: "Education" },
+    text: {
+      de: "Ich studiere *Softwaretechnik* an der *Hochschule Esslingen* und schreibe gerade meine *Bachelorarbeit* über einen *KI-gestützten Assistenten* für die Hardwaredokumentation",
+      en: "I study *Software Engineering* at *Esslingen University of Applied Sciences* and am currently writing my *bachelor's thesis* on an *AI-powered assistant* for the hardware documentation",
+    },
+    meta: {
+      de: "Abschluss voraussichtlich im Februar 2027",
+      en: "Expected graduation: February 2027",
+    },
+  },
+  {
+    icon: CodeXml,
+    color: "mix",
+    title: { de: "Technische Erfahrung", en: "Technical Expertise" },
+    text: {
+      de: "Erfahrung in *Fullstack-Entwicklung*, *KI-Systemen* und *Agentic AI*",
+      en: "Experienced in *full-stack development*, *AI systems* and *agentic AI*",
+    },
+    meta: {
+      de: "Gesammelt in Werkstudentenjobs, einem Praktikum, meiner Bachelorarbeit und Studienprojekten",
+      en: "Gained through working student jobs, an internship, my bachelor's thesis and university projects",
+    },
+  },
+  {
+    icon: Heart,
+    color: "to",
+    title: { de: "Außerhalb vom Code", en: "Beyond Code" },
+    text: {
+      de: "Man findet mich beim *Entdecken neuer Restaurants*, beim *Anime schauen*, im *Gym*, beim *Kampfsport* und manchmal auch beim *Gamen*",
+      en: "You'll find me *discovering new restaurants*, *watching anime*, at the *gym*, doing *martial arts* and sometimes *gaming*",
+    },
+    meta: {
+      de: "Und natürlich verbringe ich gerne Zeit mit meiner Familie und meinen Freunden",
+      en: "And of course I love spending time with my family and friends",
+    },
+  },
+];
+---
+
+<Section id="about">
+  <div class="about-container">
+    <h2 class="about-title gradient-text">{nav[lang].about}</h2>
+
+    <div class="about-cards">
+      {cards.map(({ icon: Icon, color, title, text, meta }) => (
+        <SpotlightCard
+          client:visible
+          className={`about-card about-card--${color}`}
+          spotlightColor="var(--card-color)"
+        >
+          <div class="card-icon">
+            <Icon size={22} />
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">{title[lang]}</h3>
+            <p class="card-text" set:html={highlight(text[lang])} />
+            <p class="card-meta">{meta[lang]}</p>
+          </div>
+        </SpotlightCard>
+      ))}
+    </div>
+  </div>
+</Section>
+
+<style>
+  .about-container {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    padding-block: 6rem;
+  }
+
+  .about-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .about-cards {
+    display: grid;
+    gap: 1.5rem;
+    width: var(--content-width);
+  }
+
+  .about-cards :global(.about-card) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .about-cards :global(.about-card:hover) {
+    transform: translateY(-4px);
+  }
+
+  .about-cards :global(.about-card--from) {
+    --card-color: var(--accent-from);
+  }
+
+  .about-cards :global(.about-card--mix) {
+    --card-color: color-mix(in srgb, var(--accent-from), var(--accent-to));
+  }
+
+  .about-cards :global(.about-card--to) {
+    --card-color: var(--accent-to);
+  }
+
+  .card-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    color: var(--card-color);
+    background-color: color-mix(in srgb, var(--card-color) 15%, transparent);
+    border: 1px solid color-mix(in srgb, var(--card-color) 30%, transparent);
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .card-title {
+    font-size: 1.375rem;
+    font-weight: 700;
+  }
+
+  .card-text {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: rgb(255 255 255 / 0.85);
+  }
+
+  .card-text :global(.card-highlight) {
+    color: var(--card-color);
+    font-weight: 600;
+  }
+
+  .card-meta {
+    font-size: 0.875rem;
+    color: rgb(255 255 255 / 0.5);
+  }
+
+  @media (max-width: 40rem) {
+    .about-cards :global(.about-card) {
+      padding: 1.25rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-cards :global(.about-card),
+    .about-cards :global(.about-card:hover) {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>

@@ -1,12 +1,12 @@
 ---
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import { BackgroundGradientAnimation } from "../components/ui/background-gradient-animation";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import { BackgroundGradientAnimation } from "@/components/ui/BackgroundGradientAnimation";
+import type { Lang } from "@/i18n/ui";
+import "@/styles/global.css";
 import "@fontsource-variable/plus-jakarta-sans";
 import "@fontsource/maple-mono/400.css";
 import "@fontsource/maple-mono/600.css";
-import "../styles/global.css";
-import type { Lang } from "../i18n/ui";
 
 interface Props {
   title: string;
@@ -40,7 +40,9 @@ const { title, lang, alternateHref } = Astro.props;
 
     <script>
       const DURATION = 900;
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      );
       let frame = 0;
 
       const easeInOutCubic = (t: number) =>
@@ -101,7 +103,8 @@ const { title, lang, alternateHref } = Astro.props;
         if (location.hash !== url.hash) history.pushState(null, "", url.hash);
         scrollToTarget(target);
 
-        if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+        if (!target.hasAttribute("tabindex"))
+          target.setAttribute("tabindex", "-1");
         target.focus({ preventScroll: true });
       });
 
