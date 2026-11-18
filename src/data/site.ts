@@ -4,4 +4,12 @@ export const site = {
   email: "erguen.bickici@tutamail.com",
   github: "https://github.com/pndroa",
   linkedin: "https://www.linkedin.com/in/erguen-bickici/",
+  contact: {
+    endpoint: import.meta.env.DEV
+      ? "http://localhost:8787"
+      : "https://contact-worker.erguen-bickici.workers.dev",
+    turnstileSiteKey: import.meta.env.DEV
+      ? "1x00000000000000000000AA"
+      : "0x4AAAAAAGHdpENM3e4R-9mz",
+  },
 };
