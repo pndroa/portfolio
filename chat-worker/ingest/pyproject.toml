@@ -1,0 +1,18 @@
+[project]
+name = "ingest"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [{ name = "pndroa", email = "157326278+pndroa@users.noreply.github.com" }]
+dependencies = [
+    "llama-index>=0.14.26",
+    "llama-index-readers-docling>=0.6.0",
+]
+
+[project.scripts]
+ingest = "ingest:main"
+
+[build-system]
+requires = ["uv_build>=0.13.9,<0.14.0"]
+build-backend = "uv_build"
