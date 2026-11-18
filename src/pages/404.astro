@@ -1,0 +1,118 @@
+---
+import { site } from "@/data/site";
+import Layout from "@/layouts/Layout.astro";
+import { House } from "@lucide/astro";
+
+const messages = [
+  {
+    lang: "de",
+    title: "Seite nicht gefunden",
+    text: "Diese Seite gibt es nicht oder sie wurde verschoben.",
+    cta: "Zur Startseite",
+    href: "/de/",
+  },
+  {
+    lang: "en",
+    title: "Page not found",
+    text: "This page doesn't exist or has been moved.",
+    cta: "Go to homepage",
+    href: "/en/",
+  },
+];
+---
+
+<Layout title={`404 | ${site.name}`} lang="de">
+  <section class="not-found">
+    <h1 class="code gradient-text">404</h1>
+
+    <div class="messages">
+      {messages.map(({ lang, title, text, cta, href }) => (
+        <div class="message" lang={lang}>
+          <h2>{title}</h2>
+          <p>{text}</p>
+          <a class="cta" href={href}>
+            <House size={18} aria-hidden="true" />
+            {cta}
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .not-found {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    width: var(--content-width);
+    margin-inline: auto;
+    padding-block: 7rem 4rem;
+    text-align: center;
+  }
+
+  .code {
+    font-size: clamp(5rem, 18vw, 10rem);
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .messages {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1.5rem;
+    width: min(100%, 44rem);
+  }
+
+  .message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.75rem 1.5rem;
+    border-radius: 1rem;
+    background-color: rgb(255 255 255 / 0.04);
+    border: 1px solid rgb(255 255 255 / 0.08);
+  }
+
+  .message h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .message p {
+    color: rgb(255 255 255 / 0.7);
+    line-height: 1.6;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.7rem 1.25rem;
+    font-weight: 600;
+    color: white;
+    background-image: var(--accent-gradient);
+    border-radius: 0.5rem;
+    transition: filter 0.2s ease;
+  }
+
+  .cta:hover {
+    filter: brightness(1.1);
+  }
+
+  .cta:focus-visible {
+    outline: 2px solid var(--accent-to);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta {
+      transition: none;
+    }
+  }
+</style>
