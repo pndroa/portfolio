@@ -1,7 +1,7 @@
 ---
-import LegalPage from "../../components/LegalPage.astro";
-import { site } from "../../data/site";
-import Layout from "../../layouts/Layout.astro";
+import LegalPage from "@/components/LegalPage.astro";
+import { site } from "@/data/site";
+import Layout from "@/layouts/Layout.astro";
 ---
 
 <Layout
@@ -28,28 +28,37 @@ import Layout from "../../layouts/Layout.astro";
       Email: <a href={`mailto:${site.email}`}>{site.email}</a>
     </p>
 
-    <h2>2. Hosting via GitHub Pages</h2>
+    <h2>2. Hosting via Cloudflare</h2>
     <p>
-      This website is hosted on GitHub Pages, a service of GitHub, Inc., 88
-      Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA. When you visit
-      this site, GitHub processes technically necessary data, in particular your
-      IP address, in order to deliver the site and keep the service secure.
-      GitHub stores this data in server log files.
+      This website is provided via Cloudflare Pages, a service of Cloudflare,
+      Inc., 101 Townsend St, San Francisco, CA 94107, USA. All requests to this
+      website pass through Cloudflare's global server network. In the process,
+      Cloudflare processes technically necessary data, in particular your IP
+      address, the requested address, date and time, your browser type and the
+      previously visited page (referrer). This data is needed to deliver the
+      site and to protect it against attacks and abuse, for example through
+      filter rules against automated access.
     </p>
     <p>
-      The legal basis is Art. 6(1)(f) GDPR. My legitimate interest is the secure
-      and reliable provision of this website. Data may be transferred to the
-      USA. GitHub is certified under the EU-US Data Privacy Framework, which
-      ensures an adequate level of data protection.
+      Cloudflare stores this data in server log files for a limited period and
+      uses it to create aggregated statistics, for example on the number of
+      visits or the countries of origin. These statistics do not allow any
+      conclusions to be drawn about individual persons.
+    </p>
+    <p>
+      The legal basis is Art. 6(1)(f) GDPR. My legitimate interest is the
+      secure, fast and reliable provision of this website. Data may be
+      transferred to the USA. Cloudflare is certified under the EU-US Data
+      Privacy Framework, which ensures an adequate level of data protection.
     </p>
     <p>
       For more information, see{" "}
       <a
-        href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+        href="https://www.cloudflare.com/privacypolicy/"
         target="_blank"
         rel="noopener noreferrer"
       >
-        GitHub's privacy statement
+        Cloudflare's privacy policy
       </a>
       .
     </p>
@@ -57,9 +66,10 @@ import Layout from "../../layouts/Layout.astro";
     <h2>3. No cookies, no tracking</h2>
     <p>
       This website does not set cookies and does not use any analytics or
-      tracking services. Fonts are loaded locally from this website, so no
-      connections to third parties are made for them. Connections to third
-      parties are only made if you use the contact form (see section 5).
+      tracking services that evaluate your behaviour or create profiles. Fonts
+      are loaded locally from this website, so no connections to third parties
+      are made for them. Apart from hosting (see section 2), connections to
+      third parties are only made if you use the contact form (see section 5).
     </p>
 
     <h2>4. Contact by email</h2>
@@ -124,10 +134,10 @@ import Layout from "../../layouts/Layout.astro";
     <p>Under the GDPR you have the right at any time to:</p>
     <ul>
       <li>access the data stored about you (Art. 15 GDPR)</li>
-      <li>rectification of inaccurate data (Art. 16 GDPR)</li>
-      <li>erasure of your data (Art. 17 GDPR)</li>
-      <li>restriction of processing (Art. 18 GDPR)</li>
-      <li>data portability (Art. 20 GDPR)</li>
+      <li>have inaccurate data rectified (Art. 16 GDPR)</li>
+      <li>have your data erased (Art. 17 GDPR)</li>
+      <li>restrict the processing of your data (Art. 18 GDPR)</li>
+      <li>receive your data in a portable format (Art. 20 GDPR)</li>
       <li>object to the processing (Art. 21 GDPR)</li>
       <li>lodge a complaint with a data protection authority (Art. 77 GDPR)</li>
     </ul>
