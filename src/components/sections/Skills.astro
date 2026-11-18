@@ -7,7 +7,6 @@ import {
   Container,
   Database,
   FileSearch,
-  FileText,
   Kanban,
   ListOrdered,
   Plug,
@@ -29,6 +28,22 @@ type Skill = {
   name: string | Record<Lang, string>;
   slug?: string;
   icon?: typeof Code;
+  logo?: BrandIcon;
+};
+
+const chroma: BrandIcon = {
+  hex: "FFDE2D",
+  path: "M15.917 19.52c4.326 0 7.833-3.367 7.833-7.52 0-4.153-3.507-7.52-7.833-7.52-4.326 0-7.833 3.367-7.833 7.52 0 4.153 3.507 7.52 7.833 7.52ZM8.083 19.52c4.326 0 7.833-3.367 7.833-7.52 0-4.153-3.507-7.52-7.833-7.52C3.757 4.48 0.25 7.847 0.25 12 0.25 16.153 3.757 19.52 8.083 19.52ZM15.917 12c0 4.153-3.507 7.52-7.833 7.52V12h7.833Zm-7.833 0c0-4.153 3.507-7.52 7.833-7.52v7.52H8.083Z",
+};
+
+const microsoftOffice: BrandIcon = {
+  hex: "D83B01",
+  path: "M6.936 18.89c-0.681 0-1.236 0.53-1.236 1.188c0 0.447 0.258 0.831 0.641 1.035l4.779 2.562a2.527 2.527 0 0 0 1.242 0.326c0.291 0 0.569-0.051 0.827-0.141l1.633-0.454v-4.523c0.007 0.006-7.88 0.006-7.886 0.006ZM13.084 0.096a2.492 2.492 0 0 0-0.694-0.096c-0.39 0-0.78 0.077-1.131 0.256c-0.072 0.032-7.774 4.216-7.774 4.216c-0.106 0.051-0.205 0.115-0.297 0.179c-0.013 0.006-0.02 0.013-0.033 0.019c-0.059 0.044-0.113 0.089-0.172 0.134c-0.026 0.019-0.053 0.045-0.073 0.064c-0.033 0.032-0.066 0.064-0.092 0.096c-0.092 0.096-0.251 0.3-0.251 0.3a2.288 2.288 0 0 0-0.416 1.323v11.115c0 0.658 0.555 1.188 1.236 1.188c0.172 0 0.331-0.032 0.476-0.096l2.201-1.194c0.397-0.192 0.714-0.517 0.879-0.92c0.04-0.083 0.072-0.185 0.092-0.287c0.006-0.025 0.013-0.058 0.013-0.083c0-0.013 0.006-0.032 0.006-0.044c0.007-0.045 0.013-0.096 0.013-0.141c0-0.038 0.007-0.07 0.007-0.109v-5.915v-1.846c0-0.517 0.231-0.984 0.595-1.31c0 0-0.172 0.153 0 0c0.172-0.153 0.397-0.287 0.661-0.377c0.264-0.096 6.518-2.28 6.518-2.28v-3.686ZM20.125 2.087l-6.934-1.961c1.005 0.377 1.633 1.226 1.633 2.261c0 0-0.006 18.8 0 19.253c0.007 1.022-0.667 1.897-1.633 2.223c0.211-0.058 6.934-1.929 6.934-1.929c0.998-0.306 1.719-1.201 1.719-2.268v-15.313c0.006-1.06-0.721-1.961-1.719-2.268Z",
+};
+
+const agGrid: BrandIcon = {
+  hex: "FF8B00",
+  path: "M3.231 18.461L3.231 18.462L0 18.456L0 14.748L6.919 14.769L5.075 16.615L11.538 16.615L11.538 20.308L3.231 20.308L3.231 18.466L3.231 18.461ZM10.613 11.079L12.462 9.231L4.615 9.231L4.615 12.923L8.769 12.923L6.919 14.769L17.077 14.769L17.077 11.079L10.613 11.079ZM16.154 5.538L24 5.538L24 9.231L12.462 9.231L14.308 7.385L2.308 7.385L2.308 3.692L16.154 3.692L16.154 5.538Z",
 };
 
 const subtitle = {
@@ -56,11 +71,17 @@ const categories: { title: Record<Lang, string>; skills: Skill[] }[] = [
     skills: [
       { name: "React", slug: "react" },
       { name: "Next.js", slug: "nextdotjs" },
+      { name: "Node.js", slug: "nodedotjs" },
       { name: "Spring Boot", slug: "springboot" },
       { name: "FastAPI", slug: "fastapi" },
       { name: "Pydantic", slug: "pydantic" },
       { name: "Pandas", slug: "pandas" },
       { name: "openpyxl", icon: Sheet },
+      { name: "Axios", slug: "axios" },
+      { name: "Prisma", slug: "prisma" },
+      { name: "Sequelize", slug: "sequelize" },
+      { name: "Material UI", slug: "mui" },
+      { name: "AG Grid", logo: agGrid },
     ],
   },
   {
@@ -81,18 +102,22 @@ const categories: { title: Record<Lang, string>; skills: Skill[] }[] = [
       { name: "PostgreSQL", slug: "postgresql" },
       { name: "Db2", slug: "ibm", icon: Database },
       { name: "Supabase", slug: "supabase" },
+      { name: "ChromaDB", logo: chroma },
+      { name: "Redis", slug: "redis" },
     ],
   },
   {
     title: { de: "DevOps & Infrastruktur", en: "DevOps & Infrastructure" },
     skills: [
       { name: "Linux", slug: "linux" },
+      { name: "REST API", slug: "rest-api" },
       { name: "Docker", slug: "docker" },
       { name: "Kubernetes / K3s", slug: "kubernetes" },
       { name: "Harbor", slug: "harbor", icon: Container },
       { name: "Jenkins", slug: "jenkins" },
       { name: "Git", slug: "git" },
       { name: "GitHub", slug: "github" },
+      { name: "GitLab", slug: "gitlab" },
     ],
   },
   {
@@ -103,7 +128,7 @@ const categories: { title: Record<Lang, string>; skills: Skill[] }[] = [
     skills: [
       { name: "Jira", slug: "jira" },
       { name: "Confluence", slug: "confluence" },
-      { name: "Microsoft Office", icon: FileText },
+      { name: "Microsoft Office", logo: microsoftOffice },
       { name: "Scrum", icon: Repeat },
       { name: "Kanban", icon: Kanban },
       { name: { de: "Wasserfall", en: "Waterfall" }, icon: ListOrdered },
@@ -127,7 +152,7 @@ const readable = (hex: string) => {
 const resolved = categories.map((category) => ({
   title: category.title[lang],
   skills: category.skills.map((skill) => {
-    const icon = skill.slug ? brand(skill.slug) : undefined;
+    const icon = skill.logo ?? (skill.slug ? brand(skill.slug) : undefined);
     return {
       name: typeof skill.name === "string" ? skill.name : skill.name[lang],
       path: icon?.path,

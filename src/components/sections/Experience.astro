@@ -1,5 +1,6 @@
 ---
 import Section from "@/components/Section.astro";
+import { Timeline } from "@/components/ui/Timeline";
 import { nav, type Lang } from "@/i18n/ui";
 
 interface Props {
@@ -7,22 +8,224 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+
+type Localized = Record<Lang, string>;
+
+const present: Localized = { de: "heute", en: "Present" };
+
+const experience: {
+  start: string;
+  end?: string;
+  role: Localized;
+  company: string;
+  bullets: Localized[];
+  tags: string[];
+}[] = [
+  {
+    start: "2026-09",
+    role: {
+      de: "Bachelorand – KI-gestützte Datenextraktion",
+      en: "Bachelor's Thesis – AI-Powered Data Extraction",
+    },
+    company: "Mercedes-Benz Group AG",
+    bullets: [
+      {
+        de: "Entwicklung eines KI-gestützten Microservices zur Extraktion relevanter Daten aus unstrukturierten Excel- und PDF-Dateien der Hardwaredokumentation",
+        en: "Development of an AI-powered microservice that extracts relevant data from unstructured Excel and PDF files of the hardware documentation",
+      },
+      {
+        de: "Orchestrierung der KI-Workflows inkl. Human-in-the-Loop",
+        en: "Orchestration of the AI workflows including human-in-the-loop",
+      },
+      {
+        de: "Bereitstellung als REST-API mit Live-Statusupdates per Streaming und strukturierter JSON-Ausgabe",
+        en: "Delivered as a REST API with live status updates via streaming and structured JSON output",
+      },
+      {
+        de: "Berücksichtigung von Sicherheitsaspekten (Prompt Injection) und der Datenqualität",
+        en: "Addressing security aspects (prompt injection) and data quality",
+      },
+      {
+        de: "Observability und Evaluation des KI-Workflows",
+        en: "Observability and evaluation of the AI workflow",
+      },
+    ],
+    tags: [
+      "Python",
+      "LangChain",
+      "LangGraph",
+      "Pandas",
+      "openpyxl",
+      "FastAPI",
+      "Pydantic",
+      "Docling",
+      "ChromaDB",
+      "Docker",
+      "REST API",
+      "Git",
+      "GitHub",
+      "CI/CD",
+    ],
+  },
+  {
+    start: "2025-02",
+    end: "2026-08",
+    role: {
+      de: "Werkstudent – KI-Integration & Prozessoptimierung",
+      en: "Working Student – AI Integration & Process Optimization",
+    },
+    company: "Mercedes-Benz Group AG",
+    bullets: [
+      {
+        de: "Ansprechpartner für den Einsatz von KI-Agenten in der Abteilung",
+        en: "Point of contact for the use of AI agents in the department",
+      },
+      {
+        de: "Schulung und Unterstützung von Mitarbeitenden bei der Nutzung von KI-Agenten",
+        en: "Training and supporting colleagues in using AI agents",
+      },
+      {
+        de: "Entwicklung von Skills und MCP-Servern für Claude Code",
+        en: "Development of skills and MCP servers for Claude Code",
+      },
+      {
+        de: "Automatisierung von Arbeitsabläufen durch KI-gestützte Tools",
+        en: "Automating workflows with AI-powered tools",
+      },
+    ],
+    tags: ["Python", "Claude Code", "MCP", "Agentic AI"],
+  },
+  {
+    start: "2024-08",
+    end: "2025-01",
+    role: {
+      de: "Praktikant – Full-Stack-Entwicklung",
+      en: "Intern – Full-Stack Development",
+    },
+    company: "Mercedes-Benz Group AG",
+    bullets: [
+      {
+        de: "Eigenständige Weiterentwicklung des Reporting-Tools zur API-Nutzungsanalyse",
+        en: "Independent further development of the reporting tool for API usage analysis",
+      },
+      {
+        de: "Abstimmung von Anforderungen mit den Stakeholdern",
+        en: "Aligning requirements with stakeholders",
+      },
+      {
+        de: "Konzeption und agile Umsetzung neuer Features in Front- und Backend",
+        en: "Design and agile implementation of new features in frontend and backend",
+      },
+      {
+        de: "Erweiterung der Datenauswertung und -visualisierung",
+        en: "Extending data analysis and visualization",
+      },
+      {
+        de: "Deployment in verschiedene Stages und Pflege der Container-Images",
+        en: "Deployment to multiple stages and maintenance of the container images",
+      },
+    ],
+    tags: [
+      "TypeScript",
+      "CSS",
+      "React",
+      "Next.js",
+      "Node.js",
+      "Sequelize",
+      "Material UI",
+      "AG Grid",
+      "Docker",
+      "Jenkins",
+      "Harbor",
+      "Git",
+      "GitHub",
+      "CI/CD",
+      "REST API",
+    ],
+  },
+  {
+    start: "2023-11",
+    end: "2024-07",
+    role: {
+      de: "Werkstudent – Full-Stack-Entwicklung",
+      en: "Working Student – Full-Stack Development",
+    },
+    company: "Mercedes-Benz Group AG",
+    bullets: [
+      {
+        de: "Entwicklung von Confluence-Widgets für die interne Projekt- und Wissensdokumentation",
+        en: "Development of Confluence widgets for internal project and knowledge documentation",
+      },
+      {
+        de: "Mitarbeit an der Entwicklung eines Reporting-Tools zur Auswertung der API-Nutzung",
+        en: "Contributing to the development of a reporting tool for analyzing API usage",
+      },
+    ],
+    tags: ["JavaScript", "HTML", "CSS", "Confluence", "React"],
+  },
+  {
+    start: "2022-11",
+    end: "2023-10",
+    role: {
+      de: "Werkstudent – Testautomatisierung",
+      en: "Working Student – Test Automation",
+    },
+    company: "Ernst Klett Verlag GmbH",
+    bullets: [
+      {
+        de: "Entwicklung automatisierter End-to-End-Tests",
+        en: "Development of automated end-to-end tests",
+      },
+      {
+        de: "Integration in CI/CD-Pipelines",
+        en: "Integration into CI/CD pipelines",
+      },
+    ],
+    tags: ["Python", "Playwright", "pytest", "GitLab", "CI/CD"],
+  },
+];
+
+const monthFormat = new Intl.DateTimeFormat(lang, {
+  month: "short",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
+const formatMonth = (value: string) =>
+  monthFormat.format(new Date(`${value}-01`));
+
+const data = experience.map(({ start, end, role, company, bullets, tags }) => ({
+  period: `${formatMonth(start)} – ${end ? formatMonth(end) : present[lang]}`,
+  role: role[lang],
+  company,
+  bullets: bullets.map((bullet) => bullet[lang]),
+  tags,
+}));
 ---
 
 <Section id="experience">
   <div class="experience-container">
-    <h2 class="gradient-text">{nav[lang].experience}</h2>
+    <h2 class="experience-title gradient-text">{nav[lang].experience}</h2>
+    <Timeline client:visible data={data} />
   </div>
 </Section>
 
 <style>
   .experience-container {
-    min-height: 100dvh;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 4rem;
-    width: 75%;
+    gap: 2.5rem;
+    width: var(--content-width);
     margin-inline: auto;
+    padding-block: 6rem;
+  }
+
+  .experience-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    text-align: center;
+    text-wrap: balance;
   }
 </style>

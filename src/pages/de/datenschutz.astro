@@ -12,10 +12,13 @@ import Layout from "../../layouts/Layout.astro";
   <LegalPage title="Datenschutzerklärung">
     <h2>1. Verantwortlicher</h2>
     <address>
-      {site.name}<br />
+      {site.name}
+      <br />
       {site.country.de}
     </address>
-    <p>E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a></p>
+    <p>
+      E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a>
+    </p>
 
     <h2>2. Hosting über GitHub Pages</h2>
     <p>
@@ -34,18 +37,24 @@ import Layout from "../../layouts/Layout.astro";
       Datenschutzniveau sicherstellt.
     </p>
     <p>
-      Weitere Informationen finden Sie in der <a
+      Weitere Informationen finden Sie in der{" "}
+      <a
         href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement"
         target="_blank"
-        rel="noopener noreferrer">Datenschutzerklärung von GitHub</a
-      >.
+        rel="noopener noreferrer"
+      >
+        Datenschutzerklärung von GitHub
+      </a>
+      .
     </p>
 
     <h2>3. Keine Cookies, kein Tracking</h2>
     <p>
       Diese Webseite setzt keine Cookies und verwendet keine Analyse- oder
       Tracking-Dienste. Schriftarten werden lokal von dieser Webseite geladen,
-      es werden dafür keine Verbindungen zu Dritten aufgebaut.
+      es werden dafür keine Verbindungen zu Dritten aufgebaut. Verbindungen zu
+      Dritten entstehen nur, wenn Sie das Kontaktformular verwenden (siehe
+      Abschnitt 5).
     </p>
 
     <h2>4. Kontakt per E-Mail</h2>
@@ -58,7 +67,54 @@ import Layout from "../../layouts/Layout.astro";
       erforderlich sind.
     </p>
 
-    <h2>5. Links zu anderen Webseiten</h2>
+    <h2>5. Kontaktformular</h2>
+    <p>
+      Wenn Sie das Kontaktformular verwenden, werden Ihr Name, Ihre
+      E-Mail-Adresse und Ihre Nachricht übertragen, um mir Ihre Anfrage per
+      E-Mail zuzustellen. Für die Rechtsgrundlage und die Löschung gilt
+      Abschnitt 4 entsprechend.
+    </p>
+    <p>
+      <strong>Spamschutz:</strong> Zum Schutz vor Spam und Missbrauch nutze ich
+      Cloudflare Turnstile, einen Dienst der Cloudflare, Inc., 101 Townsend St,
+      San Francisco, CA 94107, USA. Turnstile wird erst geladen, wenn Sie mit
+      dem Formular interagieren. Dabei verarbeitet Cloudflare technische Daten
+      wie Ihre IP-Adresse und Browserinformationen, um zu prüfen, ob die Anfrage
+      von einem Menschen stammt. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO.
+      Mein berechtigtes Interesse liegt im Schutz des Formulars vor
+      automatisiertem Missbrauch.
+    </p>
+    <p>
+      <strong>Verarbeitung und Versand:</strong> Die Formulardaten werden an
+      eine von mir betriebene Funktion bei Cloudflare (Cloudflare Workers)
+      gesendet. Diese prüft die Anfrage und übergibt sie zum Versand an Resend,
+      einen E-Mail-Dienst der Resend, Inc., USA. Cloudflare protokolliert dabei
+      technische Daten der Anfrage, etwa die IP-Adresse, für einen begrenzten
+      Zeitraum zur Fehleranalyse und Sicherheit. Resend speichert die versendete
+      E-Mail nach seinen Aufbewahrungsfristen.
+    </p>
+    <p>
+      Bei beiden Anbietern kann eine Übermittlung in die USA stattfinden.
+      Weitere Informationen finden Sie in der{" "}
+      <a
+        href="https://www.cloudflare.com/privacypolicy/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Datenschutzerklärung von Cloudflare
+      </a>{" "}
+      und der{" "}
+      <a
+        href="https://resend.com/legal/privacy-policy"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Datenschutzerklärung von Resend
+      </a>
+      .
+    </p>
+
+    <h2>6. Links zu anderen Webseiten</h2>
     <p>
       Diese Webseite enthält Links zu GitHub und LinkedIn. Erst wenn Sie einen
       dieser Links anklicken, werden Daten an den jeweiligen Anbieter
@@ -66,7 +122,7 @@ import Layout from "../../layouts/Layout.astro";
       Anbieters.
     </p>
 
-    <h2>6. Ihre Rechte</h2>
+    <h2>7. Ihre Rechte</h2>
     <p>Sie haben nach der DSGVO jederzeit das Recht auf:</p>
     <ul>
       <li>Auskunft über Ihre gespeicherten Daten (Art. 15 DSGVO)</li>
@@ -78,9 +134,8 @@ import Layout from "../../layouts/Layout.astro";
       <li>Beschwerde bei einer Datenschutz-Aufsichtsbehörde (Art. 77 DSGVO)</li>
     </ul>
     <p>
-      Wenden Sie sich dafür formlos per E-Mail an <a href={`mailto:${site.email}`}
-        >{site.email}</a
-      >.
+      Wenden Sie sich dafür formlos per E-Mail an{" "}
+      <a href={`mailto:${site.email}`}>{site.email}</a>.
     </p>
 
     <p>Stand: November 2026</p>

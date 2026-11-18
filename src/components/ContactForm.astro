@@ -1,0 +1,362 @@
+---
+import { site } from "@/data/site";
+import type { Lang } from "@/i18n/ui";
+import { Mail, Send, User } from "@lucide/astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const text = {
+  de: {
+    name: "Name",
+    namePlaceholder: "Max Mustermann",
+    email: "E-Mail",
+    emailPlaceholder: "max@beispiel.de",
+    message: "Nachricht",
+    messagePlaceholder: "Worum geht es?",
+    submit: "Nachricht senden",
+    sending: "Wird gesendet …",
+    pending:
+      "Die Spam-Prüfung ist noch nicht fertig. Bitte kurz warten und erneut senden.",
+    success: "Danke für die Nachricht! Ich melde mich bald.",
+    error: `Senden fehlgeschlagen. Alternativ direkt per E-Mail an ${site.email}`,
+    privacy: "Die Angaben werden nur zur Beantwortung der Anfrage verwendet.",
+    privacyLink: "Datenschutzerklärung",
+    privacyHref: "/de/datenschutz",
+  },
+  en: {
+    name: "Your Name",
+    namePlaceholder: "John Doe",
+    email: "Your Email",
+    emailPlaceholder: "john@example.com",
+    message: "Your Message",
+    messagePlaceholder: "Tell me about your project …",
+    submit: "Send Message",
+    sending: "Sending …",
+    pending:
+      "The spam check isn't finished yet. Please wait a moment and try again.",
+    success: "Thanks for your message! I'll get back to you soon.",
+    error: `Sending failed. You can also email me directly at ${site.email}`,
+    privacy: "Your details are only used to answer your request.",
+    privacyLink: "Privacy policy",
+    privacyHref: "/en/privacy",
+  },
+};
+
+const t = text[lang];
+---
+
+<form
+  class="contact-form"
+  data-contact-form
+  data-endpoint={site.contact.endpoint}
+  data-sitekey={site.contact.turnstileSiteKey}
+  data-sending={t.sending}
+  data-pending={t.pending}
+  data-success={t.success}
+  data-error={t.error}
+>
+  <div class="form-row">
+    <label class="field">
+      <span class="field-label">
+        <User size={14} aria-hidden="true" />
+        {t.name}
+      </span>
+      <input
+        name="name"
+        type="text"
+        autocomplete="name"
+        placeholder={t.namePlaceholder}
+        maxlength="100"
+        required
+      />
+    </label>
+
+    <label class="field">
+      <span class="field-label">
+        <Mail size={14} aria-hidden="true" />
+        {t.email}
+      </span>
+      <input
+        name="email"
+        type="email"
+        autocomplete="email"
+        placeholder={t.emailPlaceholder}
+        maxlength="200"
+        required
+      />
+    </label>
+  </div>
+
+  <label class="field">
+    <span class="field-label">{t.message}</span>
+    <textarea
+      name="message"
+      rows="6"
+      placeholder={t.messagePlaceholder}
+      maxlength="5000"
+      required
+    ></textarea>
+  </label>
+
+  <div data-turnstile></div>
+
+  <button type="submit" class="submit">
+    <span data-label>{t.submit}</span>
+    <Send size={16} aria-hidden="true" />
+  </button>
+
+  <p class="status" role="status" aria-live="polite" data-status></p>
+
+  <div class="notes">
+    <p>
+      {t.privacy} <a href={t.privacyHref}>{t.privacyLink}</a>
+    </p>
+  </div>
+</form>
+
+<script>
+  type Turnstile = {
+    render: (
+      container: HTMLElement,
+      options: Record<string, unknown>,
+    ) => string;
+    reset: (widgetId: string) => void;
+  };
+
+  const TURNSTILE_SRC =
+    "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+
+  const getTurnstile = () =>
+    (window as Window & { turnstile?: Turnstile }).turnstile;
+
+  document
+    .querySelectorAll<HTMLFormElement>("[data-contact-form]")
+    .forEach((form) => {
+      const container = form.querySelector<HTMLElement>("[data-turnstile]");
+      const status = form.querySelector<HTMLElement>("[data-status]");
+      const button = form.querySelector<HTMLButtonElement>(
+        "button[type=submit]",
+      );
+      const label = form.querySelector<HTMLElement>("[data-label]");
+      if (!container || !status || !button || !label) return;
+
+      const idleLabel = label.textContent ?? "";
+      let widgetId: string | undefined;
+
+      const loadTurnstile = () => {
+        const script = document.createElement("script");
+        script.src = TURNSTILE_SRC;
+        script.async = true;
+        script.addEventListener("load", () => {
+          widgetId = getTurnstile()?.render(container, {
+            sitekey: form.dataset.sitekey,
+            theme: "dark",
+            language: document.documentElement.lang,
+            size: "flexible",
+            appearance: "interaction-only",
+          });
+        });
+        document.head.append(script);
+      };
+
+      const showStatus = (message: string | undefined, state: string) => {
+        status.textContent = message ?? "";
+        status.dataset.state = state;
+      };
+
+      form.addEventListener("focusin", loadTurnstile, { once: true });
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const data = new FormData(form);
+        const token = data.get("cf-turnstile-response");
+
+        if (typeof token !== "string" || !token) {
+          showStatus(form.dataset.pending, "error");
+          return;
+        }
+
+        button.disabled = true;
+        label.textContent = form.dataset.sending ?? "";
+        status.textContent = "";
+        delete status.dataset.state;
+
+        try {
+          const response = await fetch(form.dataset.endpoint ?? "", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: data.get("name"),
+              email: data.get("email"),
+              message: data.get("message"),
+              token,
+            }),
+          });
+          const result = await response.json();
+          if (!response.ok || !result.success) throw new Error(result.error);
+
+          form.reset();
+          showStatus(form.dataset.success, "success");
+        } catch {
+          showStatus(form.dataset.error, "error");
+        } finally {
+          button.disabled = false;
+          label.textContent = idleLabel;
+          if (widgetId) getTurnstile()?.reset(widgetId);
+        }
+      });
+    });
+</script>
+
+<style>
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: min(100%, 40rem);
+    padding: 1.75rem;
+    border-radius: 1rem;
+    background-color: rgb(255 255 255 / 0.04);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    backdrop-filter: blur(12px);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1.25rem;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .field-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: rgb(255 255 255 / 0.85);
+  }
+
+  .field-label :global(svg) {
+    color: rgb(255 255 255 / 0.6);
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.75rem 0.875rem;
+    font: inherit;
+    color: white;
+    background-color: rgb(255 255 255 / 0.03);
+    border: 1px solid rgb(255 255 255 / 0.12);
+    border-radius: 0.5rem;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: rgb(255 255 255 / 0.35);
+  }
+
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: none;
+    border-color: var(--accent-from);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--accent-from) 25%, transparent);
+  }
+
+  textarea {
+    min-height: 9rem;
+    resize: vertical;
+  }
+
+  [data-turnstile]:empty {
+    display: none;
+  }
+
+  .submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    padding: 0.8rem 1rem;
+    font: inherit;
+    font-weight: 600;
+    color: white;
+    background-image: var(--accent-gradient);
+    border: 0;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition:
+      filter 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .submit:hover {
+    filter: brightness(1.1);
+  }
+
+  .submit:active {
+    transform: translateY(1px);
+  }
+
+  .submit:focus-visible {
+    outline: 2px solid var(--accent-to);
+    outline-offset: 3px;
+  }
+
+  .submit:disabled {
+    cursor: wait;
+    opacity: 0.7;
+  }
+
+  .status {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .status:empty {
+    display: none;
+  }
+
+  .status[data-state="success"] {
+    color: #4ade80;
+  }
+
+  .status[data-state="error"] {
+    color: #f87171;
+  }
+
+  .notes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.8rem;
+    text-align: center;
+    color: rgb(255 255 255 / 0.5);
+  }
+
+  .notes a {
+    color: rgb(255 255 255 / 0.75);
+    text-decoration: underline;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    input,
+    textarea,
+    .submit {
+      transition: none;
+    }
+  }
+</style>

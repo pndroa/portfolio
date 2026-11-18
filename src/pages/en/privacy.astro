@@ -11,25 +11,30 @@ import Layout from "../../layouts/Layout.astro";
 >
   <LegalPage title="Privacy policy">
     <p>
-      This is a translation. The <a href="/de/datenschutz" hreflang="de"
-        >German version</a
-      > is legally binding.
+      This is a translation. The{" "}
+      <a href="/de/datenschutz" hreflang="de">
+        German version
+      </a>{" "}
+      is legally binding.
     </p>
 
     <h2>1. Controller</h2>
     <address>
-      {site.name}<br />
+      {site.name}
+      <br />
       {site.country.en}
     </address>
-    <p>Email: <a href={`mailto:${site.email}`}>{site.email}</a></p>
+    <p>
+      Email: <a href={`mailto:${site.email}`}>{site.email}</a>
+    </p>
 
     <h2>2. Hosting via GitHub Pages</h2>
     <p>
-      This website is hosted on GitHub Pages, a service of GitHub, Inc., 88 Colin
-      P. Kelly Jr. Street, San Francisco, CA 94107, USA. When you visit this
-      site, GitHub processes technically necessary data, in particular your IP
-      address, in order to deliver the site and keep the service secure. GitHub
-      stores this data in server log files.
+      This website is hosted on GitHub Pages, a service of GitHub, Inc., 88
+      Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA. When you visit
+      this site, GitHub processes technically necessary data, in particular your
+      IP address, in order to deliver the site and keep the service secure.
+      GitHub stores this data in server log files.
     </p>
     <p>
       The legal basis is Art. 6(1)(f) GDPR. My legitimate interest is the secure
@@ -38,36 +43,84 @@ import Layout from "../../layouts/Layout.astro";
       ensures an adequate level of data protection.
     </p>
     <p>
-      For more information, see <a
+      For more information, see{" "}
+      <a
         href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
         target="_blank"
-        rel="noopener noreferrer">GitHub's privacy statement</a
-      >.
+        rel="noopener noreferrer"
+      >
+        GitHub's privacy statement
+      </a>
+      .
     </p>
 
     <h2>3. No cookies, no tracking</h2>
     <p>
       This website does not set cookies and does not use any analytics or
       tracking services. Fonts are loaded locally from this website, so no
-      connections to third parties are made for them.
+      connections to third parties are made for them. Connections to third
+      parties are only made if you use the contact form (see section 5).
     </p>
 
     <h2>4. Contact by email</h2>
     <p>
       If you send me an email, I process your information solely to handle your
-      request. The legal basis is Art. 6(1)(b) GDPR if your request relates to
-      a contract or pre-contractual measures, otherwise Art. 6(1)(f) GDPR. Your
+      request. The legal basis is Art. 6(1)(b) GDPR if your request relates to a
+      contract or pre-contractual measures, otherwise Art. 6(1)(f) GDPR. Your
       data is deleted as soon as it is no longer needed for this purpose.
     </p>
 
-    <h2>5. Links to other websites</h2>
+    <h2>5. Contact form</h2>
+    <p>
+      If you use the contact form, your name, email address and message are
+      transmitted so that your request can be delivered to me by email. The
+      legal basis and deletion are handled as described in section 4.
+    </p>
+    <p>
+      <strong>Spam protection:</strong> To protect against spam and abuse, I use
+      Cloudflare Turnstile, a service of Cloudflare, Inc., 101 Townsend St, San
+      Francisco, CA 94107, USA. Turnstile is only loaded once you interact with
+      the form. Cloudflare processes technical data such as your IP address and
+      browser information to check whether the request comes from a human. The
+      legal basis is Art. 6(1)(f) GDPR. My legitimate interest is protecting the
+      form against automated abuse.
+    </p>
+    <p>
+      <strong>Processing and delivery:</strong> The form data is sent to a
+      function I operate on Cloudflare (Cloudflare Workers). It checks the
+      request and passes it to Resend, an email service of Resend, Inc., USA,
+      for delivery. Cloudflare logs technical request data, such as the IP
+      address, for a limited time for troubleshooting and security. Resend
+      stores the sent email according to its retention periods.
+    </p>
+    <p>
+      Both providers may transfer data to the USA. For more information, see the{" "}
+      <a
+        href="https://www.cloudflare.com/privacypolicy/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Cloudflare privacy policy
+      </a>{" "}
+      and the{" "}
+      <a
+        href="https://resend.com/legal/privacy-policy"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Resend privacy policy
+      </a>
+      .
+    </p>
+
+    <h2>6. Links to other websites</h2>
     <p>
       This website contains links to GitHub and LinkedIn. Data is only
       transferred to these providers once you click one of these links. Their
       own privacy policies apply there.
     </p>
 
-    <h2>6. Your rights</h2>
+    <h2>7. Your rights</h2>
     <p>Under the GDPR you have the right at any time to:</p>
     <ul>
       <li>access the data stored about you (Art. 15 GDPR)</li>
@@ -79,9 +132,8 @@ import Layout from "../../layouts/Layout.astro";
       <li>lodge a complaint with a data protection authority (Art. 77 GDPR)</li>
     </ul>
     <p>
-      To do so, simply contact me by email at <a href={`mailto:${site.email}`}
-        >{site.email}</a
-      >.
+      To do so, simply contact me by email at{" "}
+      <a href={`mailto:${site.email}`}>{site.email}</a>.
     </p>
 
     <p>Last updated: November 2026</p>
