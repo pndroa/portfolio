@@ -7,7 +7,7 @@
 		"enabled": true,
 	},
 	"vars": {
-		"ALLOWED_ORIGINS": "https://erguen-bickici.de,http://localhost:4321",
+		"ALLOWED_ORIGINS": "https://erguen-bickici.de,https://dev.erguen-bickici.de,http://localhost:4321",
 		"CONTACT_TO": "erguen.bickici@tutamail.com",
 		"CONTACT_FROM": "Portfolio <kontakt@erguen-bickici.de>",
 	},
