@@ -1,4 +1,5 @@
 ---
+import ChatWidget from "@/components/chat/ChatWidget";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import { BackgroundGradientAnimation } from "@/components/ui/BackgroundGradientAnimation";
@@ -17,7 +18,7 @@ interface Props {
 const { title, lang, alternateHref } = Astro.props;
 ---
 
-<html lang={lang}>
+<html lang={lang} class="dark">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -37,7 +38,7 @@ const { title, lang, alternateHref } = Astro.props;
       <slot />
     </main>
     <Footer lang={lang} />
-
+    <ChatWidget client:only="react" lang={lang} />
     <script>
       const DURATION = 900;
       const reduceMotion = window.matchMedia(

@@ -12,4 +12,12 @@ export const site = {
       ? "1x00000000000000000000AA"
       : "0x4AAAAAAGHdpENM3e4R-9mz",
   },
+  chat: {
+    endpoint: import.meta.env.DEV
+      ? "http://localhost:8787"
+      : "https://api.erguen-bickici.de",
+    turnstileSiteKey: import.meta.env.DEV
+      ? "1x00000000000000000000AA"
+      : "0x4AAAAAAGHw8Ljvi6rVv26F",
+  },
 };
