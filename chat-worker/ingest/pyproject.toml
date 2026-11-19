@@ -7,7 +7,13 @@ requires-python = ">=3.12"
 authors = [{ name = "pndroa", email = "157326278+pndroa@users.noreply.github.com" }]
 dependencies = [
     "llama-index>=0.14.26",
+    "llama-index-core>=0.14.26",
+    "llama-index-embeddings-cloudflare-workersai>=0.7.0",
+    "llama-index-node-parser-docling>=0.6.0",
     "llama-index-readers-docling>=0.6.0",
+    "llama-index-readers-file>=0.8.0",
+    "pypdf>=6.21.4",
+    "python-dotenv>=1.2.4",
 ]
 
 [project.scripts]
