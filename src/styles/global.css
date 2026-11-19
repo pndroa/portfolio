@@ -164,6 +164,7 @@
     color-mix(in srgb, var(--accent-from) 40%, rgb(12 15 30)),
     rgb(12 15 30)
   );
+  --chat-bottom-offset: 1rem;
   --content-width: min(90% - 2rem, 200rem);
   --accent-from: #9d8bff;
   --accent-to: #da74e4;
@@ -205,6 +206,12 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+}
+
+@supports (-webkit-touch-callout: none) {
+  :root {
+    --chat-bottom-offset: 4.5rem;
+  }
 }
 
 .gradient-text {
