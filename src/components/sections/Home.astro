@@ -1,5 +1,5 @@
 ---
-import profilePicture from "@/assets/icon.jpeg";
+import profilePicture from "@/assets/erguen_bickici.png";
 import Section from "@/components/Section.astro";
 import TextType from "@/components/ui/TextType";
 import TrueFocus from "@/components/ui/TrueFocus";
@@ -80,7 +80,15 @@ const introduction = {
     max-width: 45ch;
   }
 
+  .profile-picture-container {
+    border-radius: 50%;
+    box-shadow: 0 0 6rem -1rem
+      color-mix(in srgb, var(--accent-from) 45%, transparent);
+  }
+
   .profile-picture {
+    background-image: var(--portrait-background);
+    display: block;
     width: clamp(18rem, 38vw, 34rem);
     height: auto;
     aspect-ratio: 1;

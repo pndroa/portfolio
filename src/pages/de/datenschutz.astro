@@ -57,17 +57,48 @@ import Layout from "@/layouts/Layout.astro";
       .
     </p>
 
-    <h2>3. Keine Cookies, kein Tracking</h2>
+    <h2>3. Reichweitenmessung mit Cloudflare Web Analytics</h2>
     <p>
-      Diese Webseite setzt keine Cookies und verwendet keine Analyse- oder
-      Tracking-Dienste, die Ihr Verhalten auswerten oder Profile bilden.
-      Schriftarten werden lokal von dieser Webseite geladen, es werden dafür
-      keine Verbindungen zu Dritten aufgebaut. Abgesehen vom Hosting (siehe
-      Abschnitt 2) entstehen Verbindungen zu Dritten nur, wenn Sie das
-      Kontaktformular verwenden (siehe Abschnitt 5).
+      Um zu verstehen, wie viele Menschen diese Webseite besuchen und wie
+      schnell sie lädt, nutze ich Cloudflare Web Analytics, einen Dienst der
+      Cloudflare, Inc. (siehe Abschnitt 2). Beim Aufruf einer Seite wird dafür
+      ein kleines Skript von Cloudflare geladen. Es übermittelt die aufgerufene
+      Seite, die zuvor besuchte Seite (Referrer), Browser, Betriebssystem und
+      Gerätetyp sowie Messwerte zur Ladezeit an Cloudflare. Aus Ihrer IP-Adresse
+      wird dabei das Land abgeleitet. Nach Angaben von Cloudflare werden
+      IP-Adresse und Browserdaten nicht genutzt, um einzelne Besucher
+      wiederzuerkennen.
+    </p>
+    <p>
+      Cloudflare Web Analytics setzt keine Cookies, speichert keine
+      Informationen in Ihrem Browser und erstellt keine Nutzerprofile. Ich sehe
+      ausschließlich zusammengefasste Statistiken, zum Beispiel die Anzahl der
+      Seitenaufrufe pro Tag, und kann daraus keine Rückschlüsse auf einzelne
+      Personen ziehen.
+    </p>
+    <p>
+      Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Mein berechtigtes
+      Interesse liegt darin, die Reichweite meines Portfolios zu verstehen und
+      echte Besuche von automatisierten Zugriffen zu unterscheiden. Sie können
+      die Messung verhindern, indem Sie Skripte von
+      static.cloudflareinsights.com in Ihrem Browser blockieren, zum Beispiel
+      mit einem Inhaltsblocker. Für die Übermittlung in die USA gilt Abschnitt 2
+      entsprechend.
     </p>
 
-    <h2>4. Kontakt per E-Mail</h2>
+    <h2>4. Keine Cookies, keine Profile</h2>
+    <p>
+      Diese Webseite setzt keine Cookies und verwendet keine Werbe- oder
+      Tracking-Dienste, die Ihr Verhalten über verschiedene Webseiten hinweg
+      verfolgen oder Profile bilden. Schriftarten werden lokal von dieser
+      Webseite geladen, es werden dafür keine Verbindungen zu Dritten aufgebaut.
+      Verbindungen zu Dritten entstehen nur durch das Hosting und die
+      Reichweitenmessung (Abschnitte 2 und 3) sowie, wenn Sie das
+      Kontaktformular (Abschnitt 6) oder den Chat-Assistenten (Abschnitt 7)
+      verwenden.
+    </p>
+
+    <h2>5. Kontakt per E-Mail</h2>
     <p>
       Wenn Sie mir eine E-Mail schreiben, verarbeite ich Ihre Angaben
       ausschließlich, um Ihre Anfrage zu bearbeiten. Rechtsgrundlage ist Art. 6
@@ -77,12 +108,12 @@ import Layout from "@/layouts/Layout.astro";
       erforderlich sind.
     </p>
 
-    <h2>5. Kontaktformular</h2>
+    <h2>6. Kontaktformular</h2>
     <p>
       Wenn Sie das Kontaktformular verwenden, werden Ihr Name, Ihre
       E-Mail-Adresse und Ihre Nachricht übertragen, um mir Ihre Anfrage per
       E-Mail zuzustellen. Für die Rechtsgrundlage und die Löschung gilt
-      Abschnitt 4 entsprechend.
+      Abschnitt 5 entsprechend.
     </p>
     <p>
       <strong>Spamschutz:</strong> Zum Schutz vor Spam und Missbrauch nutze ich
@@ -124,7 +155,66 @@ import Layout from "@/layouts/Layout.astro";
       .
     </p>
 
-    <h2>6. Links zu anderen Webseiten</h2>
+    <h2>7. Chat-Assistent</h2>
+    <p>
+      Auf dieser Webseite können Sie einem KI-gestützten Chat-Assistenten Fragen
+      zu meinem beruflichen Werdegang stellen. Der Assistent wird nur aktiv,
+      wenn Sie das Chatfenster öffnen und eine Nachricht absenden.
+    </p>
+    <p>
+      <strong>Spamschutz:</strong> Bei Ihrer ersten Nachricht wird Cloudflare
+      Turnstile geladen, um automatisierten Missbrauch zu verhindern. Es gelten
+      die Angaben zu Turnstile in Abschnitt 6 entsprechend.
+    </p>
+    <p>
+      <strong>Verarbeitung Ihrer Nachrichten:</strong> Ihre Nachricht und die
+      bisherigen Nachrichten des laufenden Gesprächs (höchstens zehn) werden an
+      eine von mir betriebene Funktion bei Cloudflare (Cloudflare Workers)
+      übermittelt. Diese sucht mithilfe von Cloudflare Workers AI und Cloudflare
+      Vectorize passende Informationen aus meiner eigenen Wissensdatenbank und
+      leitet Ihre Frage, den Gesprächsverlauf und diese Informationen an das
+      Sprachmodell Claude der Anthropic Ireland, Limited, Irland, weiter. Claude
+      erzeugt daraus eine Antwort, die direkt an Ihren Browser zurückgesendet
+      wird. Dabei kann eine Verarbeitung in den USA stattfinden, die durch den
+      Datenverarbeitungsvertrag von Anthropic abgesichert ist. Anthropic darf
+      die Inhalte nach seinen Vertragsbedingungen nicht zum Training seiner
+      Modelle verwenden und speichert sie nur für begrenzte Zeit nach seinen
+      Aufbewahrungsfristen.
+    </p>
+    <p>
+      <strong>Speicherung:</strong> Ich speichere Ihre Gespräche nicht. Das
+      Gespräch existiert nur in Ihrem geöffneten Browser-Tab und ist nach dem
+      Neuladen der Seite, dem Schließen des Tabs oder dem Zurücksetzen des
+      Gesprächs gelöscht. Zur Begrenzung von Missbrauch und Kosten erhält Ihr
+      Browser eine zufällige Sitzungskennung, die 30 Minuten gültig ist und
+      keine Rückschlüsse auf Ihre Person zulässt. Protokolliert werden nur
+      technische Angaben wie die Anzahl der verarbeiteten Textbausteine, nicht
+      der Inhalt Ihrer Nachrichten. Cloudflare protokolliert technische Daten
+      der Anfrage, etwa die IP-Adresse, für einen begrenzten Zeitraum. Wenn Sie
+      die Größe des Chatfensters ändern, wird diese Einstellung lokal in Ihrem
+      Browser gespeichert. Sie verlässt Ihr Gerät nicht.
+    </p>
+    <p>
+      Bitte geben Sie im Chat keine sensiblen personenbezogenen Daten ein. Die
+      Antworten werden automatisch erzeugt und können fehlerhaft sein.
+      Verbindlich sind nur Angaben, die ich Ihnen persönlich mache.
+    </p>
+    <p>
+      Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Mein berechtigtes
+      Interesse liegt darin, Besuchern eine einfache Möglichkeit zu bieten, sich
+      über meinen Werdegang zu informieren, und den Dienst vor Missbrauch zu
+      schützen. Weitere Informationen finden Sie in der{" "}
+      <a
+        href="https://www.anthropic.com/legal/privacy"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Datenschutzerklärung von Anthropic
+      </a>
+      .
+    </p>
+
+    <h2>8. Links zu anderen Webseiten</h2>
     <p>
       Diese Webseite enthält Links zu GitHub und LinkedIn. Erst wenn Sie einen
       dieser Links anklicken, werden Daten an den jeweiligen Anbieter
@@ -132,7 +222,7 @@ import Layout from "@/layouts/Layout.astro";
       Anbieters.
     </p>
 
-    <h2>7. Ihre Rechte</h2>
+    <h2>9. Ihre Rechte</h2>
     <p>Sie haben nach der DSGVO jederzeit das Recht auf:</p>
     <ul>
       <li>Auskunft über Ihre gespeicherten Daten (Art. 15 DSGVO)</li>

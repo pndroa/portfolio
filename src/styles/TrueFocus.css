@@ -5,6 +5,7 @@
 
 .focus-word {
   white-space: nowrap;
+  margin-inline: 0.2em;
 }
 
 .focus-frame {

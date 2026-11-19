@@ -63,16 +63,42 @@ import Layout from "@/layouts/Layout.astro";
       .
     </p>
 
-    <h2>3. No cookies, no tracking</h2>
+    <h2>3. Audience measurement with Cloudflare Web Analytics</h2>
     <p>
-      This website does not set cookies and does not use any analytics or
-      tracking services that evaluate your behaviour or create profiles. Fonts
-      are loaded locally from this website, so no connections to third parties
-      are made for them. Apart from hosting (see section 2), connections to
-      third parties are only made if you use the contact form (see section 5).
+      To understand how many people visit this website and how fast it loads, I
+      use Cloudflare Web Analytics, a service of Cloudflare, Inc. (see section
+      2). When you open a page, a small script from Cloudflare is loaded. It
+      sends the requested page, the previously visited page (referrer), your
+      browser, operating system and device type, and page load measurements to
+      Cloudflare. Your country is derived from your IP address. According to
+      Cloudflare, IP addresses and browser data are not used to recognise
+      individual visitors.
+    </p>
+    <p>
+      Cloudflare Web Analytics does not set cookies, does not store any
+      information in your browser and does not create user profiles. I only see
+      aggregated statistics, for example the number of page views per day, and
+      cannot draw any conclusions about individual persons from them.
+    </p>
+    <p>
+      The legal basis is Art. 6(1)(f) GDPR. My legitimate interest is to
+      understand the reach of my portfolio and to distinguish real visits from
+      automated access. You can prevent the measurement by blocking scripts from
+      static.cloudflareinsights.com in your browser, for example with a content
+      blocker. Section 2 applies accordingly to transfers to the USA.
     </p>
 
-    <h2>4. Contact by email</h2>
+    <h2>4. No cookies, no profiles</h2>
+    <p>
+      This website does not set cookies and does not use any advertising or
+      tracking services that follow your behaviour across websites or create
+      profiles. Fonts are loaded locally from this website, so no connections to
+      third parties are made for them. Connections to third parties are only
+      made through hosting and audience measurement (sections 2 and 3) and if
+      you use the contact form (section 6) or the chat assistant (section 7).
+    </p>
+
+    <h2>5. Contact by email</h2>
     <p>
       If you send me an email, I process your information solely to handle your
       request. The legal basis is Art. 6(1)(b) GDPR if your request relates to a
@@ -80,11 +106,11 @@ import Layout from "@/layouts/Layout.astro";
       data is deleted as soon as it is no longer needed for this purpose.
     </p>
 
-    <h2>5. Contact form</h2>
+    <h2>6. Contact form</h2>
     <p>
       If you use the contact form, your name, email address and message are
       transmitted so that your request can be delivered to me by email. The
-      legal basis and deletion are handled as described in section 4.
+      legal basis and deletion are handled as described in section 5.
     </p>
     <p>
       <strong>Spam protection:</strong> To protect against spam and abuse, I use
@@ -123,14 +149,69 @@ import Layout from "@/layouts/Layout.astro";
       .
     </p>
 
-    <h2>6. Links to other websites</h2>
+    <h2>7. Chat assistant</h2>
+    <p>
+      On this website you can ask an AI-powered chat assistant questions about
+      my professional background. The assistant only becomes active when you
+      open the chat window and send a message.
+    </p>
+    <p>
+      <strong>Spam protection:</strong> When you send your first message,
+      Cloudflare Turnstile is loaded to prevent automated abuse. The information
+      on Turnstile in section 6 applies accordingly.
+    </p>
+    <p>
+      <strong>Processing of your messages:</strong> Your message and the
+      previous messages of the current conversation (at most ten) are sent to a
+      function I operate on Cloudflare (Cloudflare Workers). Using Cloudflare
+      Workers AI and Cloudflare Vectorize, it searches my own knowledge base for
+      relevant information and passes your question, the conversation and this
+      information to the language model Claude provided by Anthropic Ireland,
+      Limited, Ireland. Claude generates an answer, which is sent straight back
+      to your browser. Processing may take place in the USA, safeguarded by
+      Anthropic's data processing agreement. Under its terms, Anthropic may not
+      use the content to train its models and only keeps it for a limited period
+      according to its retention periods.
+    </p>
+    <p>
+      <strong>Storage:</strong> I do not store your conversations. The
+      conversation only exists in your open browser tab and is gone once you
+      reload the page, close the tab or reset the conversation. To limit abuse
+      and costs, your browser receives a random session identifier that is valid
+      for 30 minutes and does not allow any conclusions about you. Only
+      technical information such as the number of processed text units is
+      logged, not the content of your messages. Cloudflare logs technical
+      request data, such as the IP address, for a limited time. If you resize
+      the chat window, this setting is stored locally in your browser. It never
+      leaves your device.
+    </p>
+    <p>
+      Please do not enter sensitive personal data in the chat. The answers are
+      generated automatically and may be inaccurate. Only information I give you
+      personally is binding.
+    </p>
+    <p>
+      The legal basis is Art. 6(1)(f) GDPR. My legitimate interest is to offer
+      visitors an easy way to learn about my background and to protect the
+      service against abuse. For more information, see{" "}
+      <a
+        href="https://www.anthropic.com/legal/privacy"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Anthropic's privacy policy
+      </a>
+      .
+    </p>
+
+    <h2>8. Links to other websites</h2>
     <p>
       This website contains links to GitHub and LinkedIn. Data is only
       transferred to these providers once you click one of these links. Their
       own privacy policies apply there.
     </p>
 
-    <h2>7. Your rights</h2>
+    <h2>9. Your rights</h2>
     <p>Under the GDPR you have the right at any time to:</p>
     <ul>
       <li>access the data stored about you (Art. 15 GDPR)</li>
