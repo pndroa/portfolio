@@ -46,10 +46,7 @@ export const AssistantModal: FC = () => {
         }
       }}
     >
-      <div
-        className="aui-root aui-modal-anchor fixed end-4 bottom-[max(var(--chat-bottom-offset),calc(1rem+var(--keyboard-inset,0px)))]
- size-11"
-      >
+      <div className="aui-root aui-modal-anchor fixed end-4 size-11">
         <PopoverPrimitive.Trigger
           render={(props, state) => (
             <AssistantModalButton {...props} open={state.open} />

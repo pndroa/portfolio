@@ -164,7 +164,6 @@
     color-mix(in srgb, var(--accent-from) 40%, rgb(12 15 30)),
     rgb(12 15 30)
   );
-  --chat-bottom-offset: 1rem;
   --content-width: min(90% - 2rem, 200rem);
   --accent-from: #9d8bff;
   --accent-to: #da74e4;
@@ -208,9 +207,14 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+.aui-modal-anchor {
+  bottom: calc(1rem + var(--keyboard-inset, 0px));
+}
+
 @supports (-webkit-touch-callout: none) {
-  :root {
-    --chat-bottom-offset: 4.5rem;
+  .aui-modal-anchor {
+    top: calc(100svh - 2.75rem - 1rem - var(--keyboard-inset, 0px));
+    bottom: auto;
   }
 }
 
