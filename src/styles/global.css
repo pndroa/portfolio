@@ -156,7 +156,7 @@
 }
 
 :root {
-  background-color: hsl(257 47% 0.5%);
+  background-color: rgb(12 15 30);
   color: white;
   color-scheme: dark;
   --content-width: min(90% - 2rem, 200rem);
