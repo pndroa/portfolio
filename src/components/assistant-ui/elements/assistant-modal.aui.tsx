@@ -16,6 +16,7 @@ import {
 import { Thread } from "@/components/assistant-ui/elements/thread.aui";
 import { TooltipIconButton } from "@/components/assistant-ui/elements/tooltip-icon-button";
 import { useChatText } from "@/components/chat/i18n";
+import { useKeyboardInset } from "@/components/chat/useKeyboardInset";
 import { useModalSize } from "../utils/modal-size";
 
 export const AssistantModal: FC = () => {
@@ -23,6 +24,8 @@ export const AssistantModal: FC = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const { size, reset, handleProps } = useModalSize(contentRef);
   const thread = useMemo(() => <Thread />, []);
+
+  useKeyboardInset();
 
   useAuiEvent("thread.runStart", () => {
     setOpen(true);
@@ -43,7 +46,7 @@ export const AssistantModal: FC = () => {
         }
       }}
     >
-      <div className="aui-root aui-modal-anchor fixed end-4 bottom-4 size-11">
+      <div className="aui-root aui-modal-anchor fixed end-4 bottom-[calc(1rem+var(--keyboard-inset,0px))] size-11">
         <PopoverPrimitive.Trigger
           render={(props, state) => (
             <AssistantModalButton {...props} open={state.open} />
