@@ -159,6 +159,11 @@
   background-color: rgb(12 15 30);
   color: white;
   color-scheme: dark;
+  --portrait-background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--accent-from) 40%, rgb(12 15 30)),
+    rgb(12 15 30)
+  );
   --content-width: min(90% - 2rem, 200rem);
   --accent-from: #9d8bff;
   --accent-to: #da74e4;
@@ -207,6 +212,7 @@
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+  padding-block: 0.1em;
 }
 
 html {
